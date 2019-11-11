@@ -30,47 +30,87 @@ std::vector<int> posPions(std::vector<std::vector<int>> plateau){
 		return posPions;
 	}
 
-/*
-* Permet le nombre de point de mouvement d'une pièce
-* @param noPion qui est le numéro du pion
-* @param joueur qui est le numéro du joueur
-* @param etatPions pour savoir si les pions sont dans la phase d'allé ou de retour.
-* @return le nombre de point de mouvement d'une pièce, négatif si pour le retour
-*/
-//TODO: Avec étatPions, continuer la fonction pour qu'elle comprenne le retour.
-int ptnDeMouvement(int noPion, int joueur, std::vector<int> etatPions){
-	int ptnMouvement = 0;
-	if(joueur == 1){
+	/*
+	* Permet le nombre de point de mouvement d'une pièce
+	* @param noPion qui est le numéro du pion
+	* @param joueur qui est le numéro du joueur
+	* @param etatPions pour savoir si les pions sont dans la phase d'allé ou de retour.
+	* @return le nombre de point de mouvement d'une pièce, négatif si pour le retour
+	*/
+	//TODO: Avec étatPions, continuer la fonction pour qu'elle comprenne le retour.
+	int ptnDeMouvement(int noPion, int joueur, std::vector<int> etatPions){
+		int ptnMouvement = 0;
+		if(joueur == 1){
 
 
-
-		if(noPion == 1)
-			ptnMouvement= 1;
-		else if(noPion == 2)
-			ptnMouvement = 3;
-		else if(noPion == 3)
-			ptnMouvement = 2;
-		else if(noPion == 4)
-			ptnMouvement = 3;
-		else if(noPion ==4)
-			ptnMouvement = 1;
-		}
-
-		if(joueur == 2){
 
 			if(noPion == 1)
-			ptnMouvement = 3;
-		else if(noPion == 2)
-			ptnMouvement = 1;
-		else if(noPion == 3)
-			ptnMouvement = 2;
-		else if(noPion == 4)
-			ptnMouvement = 1;
-		else if(noPion ==4)
-			ptnMouvement = 3;
+				ptnMouvement= 1;
+			else if(noPion == 2)
+				ptnMouvement = 3;
+			else if(noPion == 3)
+				ptnMouvement = 2;
+			else if(noPion == 4)
+				ptnMouvement = 3;
+			else if(noPion ==5)
+				ptnMouvement = 1;
+
+			}
+
+			if(joueur == 2){
+
+				if(noPion == 1)
+				ptnMouvement = 3;
+			else if(noPion == 2)
+				ptnMouvement = 1;
+			else if(noPion == 3)
+				ptnMouvement = 2;
+			else if(noPion == 4)
+				ptnMouvement = 1;
+			else if(noPion ==5)
+				ptnMouvement = 3;
+			}
+			return ptnMouvement;
+	}
+
+/*
+* Permet de voir si il y a un jeton dans la zonne de mouvement d'une pièce.
+* Les données de retour sont sur la zone d'un tableau de 3 entier qui reprèsente les 3 case devant le pion dans sa direction.
+* @param plateau
+* @param etatPions
+* @param joueur
+* @param pions
+* @return
+*/
+std::vector<int> pionsDevant(std::vector<std::vector<int>> plateau, std::vector<int> etatPions, int joueur, int noPion){
+	std::vector<int> pionsDevant;
+	int ptnMouvement = ptnDeMouvement(noPion, joueur, etatPions);
+	int posPionX = 0;
+	int posPionY = 0;
+	if(joueur == 1){
+
+		for(int j = 0; j<7;j++){
+			if(plateau[noPion][j]==1){
+				posPionY = noPion;
+				posPionX = j;
+			}
 		}
-		return ptnMouvement;
+		for(int j= 0; j<7;j++){
+			if(j> posPionX and j<= posPionX + ptnMouvement){
+				if(plateau[noPion][j]==2){
+					pionsDevant.push_back(1);
+				}
+				else{
+					pionsDevant.push_back(0);
+				}
+			}
+		}
+
+	}
+	return pionsDevant;
 }
+
+
 
 /*
  * Permet de bouger un jeton
@@ -83,12 +123,17 @@ int ptnDeMouvement(int noPion, int joueur, std::vector<int> etatPions){
 	 std::vector<int> pos = posPions(plateau);
 		if(joueur == 1){
 
-
+			int posy = 0;
+			int posx = 0;
 			int ptnMouvement = ptnDeMouvement(noPion, 1, etatPions);
+			for(int i = 0; i< 7; i++){
+				if(plateau[noPion][i]==1){
+					posy = noPion;
+					posx = i;
+				}
+			}
 
 
-			int posy = pos[noPion * 2 - 2];
-			int posx = pos[noPion * 2 -1];
 
 			plateau[posy][posx] = 0;
 
@@ -96,10 +141,17 @@ int ptnDeMouvement(int noPion, int joueur, std::vector<int> etatPions){
 
 			}
 			if(joueur == 2){
+				int posy = 0;
+				int posx = 0;
 				int ptnMouvement = ptnDeMouvement(noPion, 2, etatPions);
 
-			int posy = pos[10 + noPion * 2 - 2];
-			int posx = pos[10 + noPion * 2 -1];
+				for(auto i = 0; i< 7; i++){
+					if(plateau[i][noPion]==2){
+						posy = i;
+						posx = noPion;
+					}
+				}
+
 			plateau[posy][posx] = 0;
 
 			plateau[posy-ptnMouvement][posx] = 2;
@@ -163,10 +215,26 @@ int main(){
 		}
 
 		std::tuple<std::vector<std::vector<int>>, std::vector<int>> plateau1;
-    plateau1 = deplace(plateau, etatPions, 1, 2);
-    plateau = std::get<0>(plateau1);
+
+
+		plateau1 = deplace(plateau, etatPions, 2, 1);
+		plateau = std::get<0>(plateau1);
+		etatPions = std::get<1>(plateau1);
+		plateau1 = deplace(plateau, etatPions, 1, 5);
+		plateau = std::get<0>(plateau1);
+		plateau1 = deplace(plateau, etatPions, 2, 1);
+		plateau = std::get<0>(plateau1);
+		etatPions = std::get<1>(plateau1);
+		plateau1 = deplace(plateau, etatPions, 2, 2);
+		plateau = std::get<0>(plateau1);
 		etatPions = std::get<1>(plateau1);
 
+		std::vector<int>pionsD =  pionsDevant(plateau, etatPions, 1, 5);
+		std::cout << std::endl;
+		for (int i:pionsD){
+			std::cout << i << ";" ;
+		}
+		std::cout << std::endl;
 		affichePlateau(plateau);
 
 
