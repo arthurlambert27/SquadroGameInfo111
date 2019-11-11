@@ -74,7 +74,7 @@ std::vector<int> posPions(std::vector<std::vector<int>> plateau){
 	}
 
 /*
-* Permet de voir si il y a un jeton dans la zonne de mouvement d'une pièce.
+* Permet de voir si il y a un jeton dans les 3 cases devant une pièce.
 * Les données de retour sont sur la zone d'un tableau de 3 entier qui reprèsente les 3 case devant le pion dans sa direction.
 * @param plateau
 * @param etatPions
@@ -118,7 +118,7 @@ std::vector<int> pionsDevant(std::vector<std::vector<int>> plateau, std::vector<
 		}
 
 		for(int j= 6; j>=0;j = j - 1){
-			
+
 			if(j< posPionY and j>= posPionY -3){
 
 				if(plateau[j][noPion]==1){
@@ -246,8 +246,14 @@ int main(){
 		plateau1 = deplace(plateau, etatPions, 1, 5);
 		plateau = std::get<0>(plateau1);
 		etatPions = std::get<1>(plateau1);
+		plateau1 = deplace(plateau, etatPions, 2, 2);
+		plateau = std::get<0>(plateau1);
+		etatPions = std::get<1>(plateau1);
+		plateau1 = deplace(plateau, etatPions, 1, 4);
+		plateau = std::get<0>(plateau1);
+		etatPions = std::get<1>(plateau1);
 
-		std::vector<int>pionsD =  pionsDevant(plateau, etatPions, 2, 1);
+		std::vector<int>pionsD =  pionsDevant(plateau, etatPions, 2, 3);
 		std::cout << std::endl;
 		for (int i:pionsD){
 			std::cout << i << ";" ;
