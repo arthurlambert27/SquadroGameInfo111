@@ -134,6 +134,17 @@ std::vector<int> pionsDevant(std::vector<std::vector<int>> plateau, std::vector<
 	return pionsDevant;
 }
 
+std::vector<int> pionsDevantZoneMouvement(std::vector<std::vector<int>> plateau, std::vector<int> etatPions, int joueur, int noPion){
+	std::vector<int> pionDevant = pionsDevant(plateau,etatPions,joueur,noPion);
+	int ptnMouvement = ptnDeMouvement(noPion, joueur, etatPions);
+	std::vector<int> pionDevantZoneMouvement;
+	pionDevantZoneMouvement = std::vector<int>(ptnMouvement);
+	for(int i = 0; i<pionDevantZoneMouvement.size(); i++){
+		pionDevantZoneMouvement[i] = pionDevant[i];
+	}
+	return pionDevantZoneMouvement;
+}
+
 
 
 /*
@@ -253,7 +264,7 @@ int main(){
 		plateau = std::get<0>(plateau1);
 		etatPions = std::get<1>(plateau1);
 
-		std::vector<int>pionsD =  pionsDevant(plateau, etatPions, 2, 3);
+		std::vector<int>pionsD =  pionsDevantZoneMouvement(plateau, etatPions, 2, 3);
 		std::cout << std::endl;
 		for (int i:pionsD){
 			std::cout << i << ";" ;
