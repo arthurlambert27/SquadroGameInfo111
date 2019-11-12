@@ -5,6 +5,19 @@
 
 
 /*
+ * Vérifie qu'un tableau est remplie de zéro ou non
+ * @param tab le tableau
+ * @return true si le tableau est vide et false sinon
+ */
+bool tabIsNul(std::vector<int> tab){
+	for(auto i : tab){
+		if(k != 0)
+			return false;
+		}
+		return true;
+	}
+
+/*
  * Permet de localiser ou sont les pions (de 0 a 9 pour le joueur 1)(de 10 a 19 pour le joueur 2) Par exemple, la position du deuxième pions du joueur 1 est l'élément 2 et 3'
  * @param plateau Etat du jeu
  * @return posPions un tableau des positions des pions
@@ -171,21 +184,23 @@ std::vector<int> pionsDevantZoneMouvement(std::vector<std::vector<int>> plateau,
 
 
 			plateau[posy][posx] = 0;
-
+			
+			 
 			plateau[posy][posx+ptnMouvement] = 1;
 
-			}
-			if(joueur == 2){
-				int posy = 0;
-				int posx = 0;
-				int ptnMouvement = ptnDeMouvement(noPion, 2, etatPions);
+		}
+			
+		if(joueur == 2){
+			int posy = 0;
+			int posx = 0;
+			int ptnMouvement = ptnDeMouvement(noPion, 2, etatPions);
 
-				for(auto i = 0; i< 7; i++){
-					if(plateau[i][noPion]==2){
-						posy = i;
-						posx = noPion;
-					}
+			for(auto i = 0; i< 7; i++){
+				if(plateau[i][noPion]==2){
+					posy = i;
+					posx = noPion;
 				}
+			}
 
 			plateau[posy][posx] = 0;
 
