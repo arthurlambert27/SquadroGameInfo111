@@ -11,7 +11,7 @@
  */
 bool tabIsNul(std::vector<int> tab){
 	for(auto i : tab){
-		if(k != 0)
+		if(i != 0)
 			return false;
 		}
 		return true;
@@ -185,8 +185,8 @@ std::vector<int> pionsDevantZoneMouvement(std::vector<std::vector<int>> plateau,
 
 			plateau[posy][posx] = 0;
 			
-			 
-			plateau[posy][posx+ptnMouvement] = 1;
+			
+			
 
 		}
 			
