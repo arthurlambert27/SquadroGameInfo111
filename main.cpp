@@ -53,10 +53,15 @@ std::vector<int> posPions(std::vector<std::vector<int>> plateau){
 	//TODO: Avec étatPions, continuer la fonction pour qu'elle comprenne le retour.
 	int ptnDeMouvement(int noPion, int joueur, std::vector<int> etatPions){
 		int ptnMouvement = 0;
+		int etatPion = 0;
+
 		if(joueur == 1){
 
+			etatPion = etatPions[noPion - 1];
 
 
+
+			if(etatPion == 0){
 			if(noPion == 1)
 				ptnMouvement= 1;
 			else if(noPion == 2)
@@ -67,22 +72,53 @@ std::vector<int> posPions(std::vector<std::vector<int>> plateau){
 				ptnMouvement = 3;
 			else if(noPion ==5)
 				ptnMouvement = 1;
-
+			}
+			else{
+				if(noPion == 1)
+				ptnMouvement = -3;
+			else if(noPion == 2)
+				ptnMouvement = -1;
+			else if(noPion == 3)
+				ptnMouvement = -2;
+			else if(noPion == 4)
+				ptnMouvement = -1;
+			else if(noPion ==5)
+				ptnMouvement = -3;
+			}
 			}
 
 			if(joueur == 2){
 
+
+					etatPion = etatPions[ 4 + noPion ];
+
+				if(etatPion == 0){
 				if(noPion == 1)
-				ptnMouvement = 3;
+				ptnMouvement = -3;
 			else if(noPion == 2)
-				ptnMouvement = 1;
+				ptnMouvement = -1;
 			else if(noPion == 3)
-				ptnMouvement = 2;
+				ptnMouvement = -2;
 			else if(noPion == 4)
-				ptnMouvement = 1;
+				ptnMouvement = -1;
 			else if(noPion ==5)
-				ptnMouvement = 3;
+				ptnMouvement = -3;
+
 			}
+			else{
+				if(noPion == 1)
+					ptnMouvement= 1;
+				else if(noPion == 2)
+					ptnMouvement = 3;
+				else if(noPion == 3)
+					ptnMouvement = 2;
+				else if(noPion == 4)
+					ptnMouvement = 3;
+				else if(noPion ==5)
+					ptnMouvement = 1;
+			}
+			}
+			std::cout << "Il a un point de mouvement de: " << ptnMouvement << std::endl;
 			return ptnMouvement;
 	}
 
@@ -184,12 +220,23 @@ std::vector<int> pionsDevantZoneMouvement(std::vector<std::vector<int>> plateau,
 
 
 			plateau[posy][posx] = 0;
-			
-			
-			
+
+
+			//Si il est au bout
+			if(6 <= posx + ptnMouvement){
+
+				plateau[posy][6] = 1;
+				etatPions[noPion - 1 ] = 1;
+
+			}
+			else{
+				plateau[posy][posx+ptnMouvement] = 1;
+			}
+
+
 
 		}
-			
+
 		if(joueur == 2){
 			int posy = 0;
 			int posx = 0;
@@ -203,9 +250,21 @@ std::vector<int> pionsDevantZoneMouvement(std::vector<std::vector<int>> plateau,
 			}
 
 			plateau[posy][posx] = 0;
+			std::cout << posy  << "\n";
+			if(posy + ptnMouvement <= 0 ){
+				std::cout << "je suis au bout\n";
+				plateau[0][posx] = 2;
+				etatPions[4 + noPion] = 1;
+			}
+			else{
 
-			plateau[posy-ptnMouvement][posx] = 2;
+				plateau[posy+ptnMouvement][posx] = 2;
+			}
+
 				}
+
+
+
 			std::tuple<std::vector<std::vector<int>>,std::vector<int>> plateau1 (plateau, etatPions);
 
 		return plateau1;
@@ -269,22 +328,23 @@ int main(){
 
 
 
-		plateau1 = deplace(plateau, etatPions, 1, 5);
+		plateau1 = deplace(plateau, etatPions, 2, 1);
 		plateau = std::get<0>(plateau1);
 		etatPions = std::get<1>(plateau1);
-		plateau1 = deplace(plateau, etatPions, 2, 2);
+		plateau1 = deplace(plateau, etatPions, 2, 1);
 		plateau = std::get<0>(plateau1);
 		etatPions = std::get<1>(plateau1);
-		plateau1 = deplace(plateau, etatPions, 1, 4);
+		plateau1 = deplace(plateau, etatPions, 2, 1);
 		plateau = std::get<0>(plateau1);
 		etatPions = std::get<1>(plateau1);
 
-		std::vector<int>pionsD =  pionsDevantZoneMouvement(plateau, etatPions, 2, 3);
-		std::cout << std::endl;
-		for (int i:pionsD){
-			std::cout << i << ";" ;
-		}
-		std::cout << std::endl;
+
+
+
+
+
+
+
 		affichePlateau(plateau);
 
 
