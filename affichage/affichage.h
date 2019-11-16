@@ -5,7 +5,7 @@
 #include <string>
 #include <iostream>
 void affichePlateau(std::vector<std::vector<int>> plateau);
-void affichePlateauV2(std::vector<std::vector<int>> plateau);
+void affichePlateauV2(std::vector<std::vector<int>> plateau, std::vector<int> etatPions);
 
 
 #endif
