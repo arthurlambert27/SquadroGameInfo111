@@ -42,10 +42,29 @@ std::vector<std::vector<int>> creationPlateauInitial(){
 void jeu(std::vector<std::vector<int>> plateau, std::vector<int> etatPions){
 		int tour_joueur = 1;
 		int choix_pion = 0;
+    std::vector<std::vector<std::string>> aff_plateau;
+    aff_plateau = std::vector<std::vector<std::string>> (7);
+    for ( int i = 0; i < 7; i++ ){
+    aff_plateau[i] = std::vector<std::string>(7);
+  }
+    for(int i = 0; i< 7;i++){
+        for(int j=0; j<7; j++){
+          if (plateau[i][j]==1){
+            aff_plateau[i][j] = ">";
+          }
+          else if (plateau[i][j]==2){
+            aff_plateau[i][j] = "A";
+          }
+          else{
+            aff_plateau[i][j] = ".";
+          }
+        std::cout << std::endl;
+    }
+    }
 
 		std::tuple<std::vector<std::vector<int>>, std::vector<int>> plateau1;
 
-		affichePlateauV2(plateau, etatPions);
+		affichePlateauV3(plateau, aff_plateau, etatPions, choix_pion);
 		while(true){
 			 std::cout << "Entrez un coup" << std::endl;
 			std::cin >> choix_pion;
@@ -53,19 +72,18 @@ void jeu(std::vector<std::vector<int>> plateau, std::vector<int> etatPions){
 				plateau1 = deplace(plateau, etatPions, 1, choix_pion );
 				plateau = std::get<0>(plateau1);
 				etatPions = std::get<1>(plateau1);
-				affichePlateauV2(plateau, etatPions);
+				affichePlateauV3(plateau, aff_plateau, etatPions, choix_pion);
 				tour_joueur++;
 			}
 			else{ //sinon j2
-				
+
 				plateau1 = deplace(plateau, etatPions, 2, choix_pion );
 				plateau = std::get<0>(plateau1);
 				etatPions = std::get<1>(plateau1);
-				affichePlateauV2(plateau, etatPions);
+				affichePlateauV3(plateau, aff_plateau, etatPions, choix_pion);
 				tour_joueur++;
 			}
 
 
 		}
-
-}
+  }

@@ -20,55 +20,100 @@ void affichePlateau(std::vector<std::vector<int>> plateau){
 * @param plateau Plateau du jeu a afficher
 * @param etatPions tableau qui contient l'etat des pions
 */
-void affichePlateauV2(std::vector<std::vector<int>> plateau, std::vector<int> etatPions){
-	int comptePion1 = 0;
-	int comptePion2 = 0;
-	std::string affichage;
-	affichage = "|----------------------------------|\n";
 
-	for(int i = 0; i<7; i++){
-		for(int j = 0; j<7; j++){
-			if(plateau[i][j] == 1 or plateau[i][j] == 2){
+void affichePlateauV3(std::vector<std::vector<int>> plateau,std::vector<std::vector<std::string>> aff_plateau, std::vector<int> etatPions, int choix_pion){
+  std::vector<int> position = posPions(plateau);
+  int PionX =0;
+  int PionY = 0;
+  for(int i = 0; i< 7;i++){
+      for(int j=0; j<7; j++){
+        if (plateau[i][j]==1 and etatPions[i-1]==0){
+          aff_plateau[i][j] = ">";
+        }
+        else if (plateau[i][j]==1 and etatPions[i-1]==1){
+          aff_plateau[i][j] = "<";
+        }
+        else if (plateau[i][j]==2 and etatPions[j+4]==0){
+          aff_plateau[i][j] = "A";
+        }
+        else if (plateau[i][j]==2 and etatPions[j+4]==1){
+          aff_plateau[i][j] = "V";
+        }
+        else if (plateau[i][j]!=2 or plateau[i][j]!=1){
+          aff_plateau[i][j] = ".";
+        }
+      std::cout << std::endl;
+  }
+  }
+  for(int k = 0; k<etatPions.size(); k++){
+        std::cout << etatPions[k];
+        std::cout << std::endl;
+      }
 
-				if(etatPions[comptePion1]== 0 and  plateau[i][j] == 1){
-					comptePion1++;
-					affichage = affichage + "|" + ">" + "   ";
-				//si le pion du j1 est dans la phase aller
-				}
+      for(int i = 0; i< 7;i++){
+                for(int j=0; j<7; j++){
+                    std::cout << plateau[i][j];
+                }
+                std::cout << std::endl;
+            }
+  if (etatPions[choix_pion+4]== 1 and plateau[position[choix_pion+13]][position[choix_pion+14]] == 2 ){
+    
 
-				else if (etatPions[comptePion1]== 1 and  plateau[i][j] == 1){
-						comptePion1++;
-						affichage = affichage + "|" + "<" + "   "; //phase retour
+    PionX = position[choix_pion+13];
+    PionY = position[choix_pion+14];
+//std::cout << comptePion2 << '\n';
+//std::cout << position[comptePion2+13]<< '\n';
+//std::cout << position[comptePion2+14]<< '\n';
+  aff_plateau[PionX][PionY] = "V";
+}
+else if (etatPions[choix_pion+4]== 0 and plateau[position[choix_pion+13]][position[choix_pion+14]] == 2 ){
 
-					}
-				if(etatPions[comptePion2+5]== 0 and plateau[i][j] == 2 ){
-					comptePion2++;
-					affichage = affichage + "|" + "A" + "   "; //si le pion du j2 est dans la phase aller
-				}
-				else if (etatPions[comptePion2+5]== 1 and plateau[i][j] == 2 ){
 
-					comptePion2++;
-					affichage = affichage + "|" + "v" + "   ";//phase retour
-          
+  PionX = position[choix_pion+13];
+  PionY = position[choix_pion+14];
+  aff_plateau[PionX][PionY] = "A";
+}
+if (etatPions[choix_pion-1]== 1 and  plateau[position[2*choix_pion-2]][position[2*choix_pion-1]] == 1){
 
-				}
-			}
-			else{
-				affichage = affichage  + "|    "  ;
-			}
-		}
+    //affichage = affichage + "|" + "<" + "   "; //phase retour
+    PionX = position[2*choix_pion-2];
+    PionY = position[2*choix_pion-1];
+    aff_plateau[PionX][PionY] = "<";
 
-		affichage = affichage + "|\n";
-		for(int a = 0; a<3; a++){
-			for(int r = 0; r<7; r++){
-				affichage = affichage + "|    ";
-			}
-			affichage = affichage + "|\n";
-		}
-		affichage = affichage + "|----------------------------------|\n";
-	}
-	std::cout << affichage;
-	comptePion1 = 0;
-	comptePion2 = 0;
+  }
+  else if (etatPions[choix_pion-1]== 0 and  plateau[position[2*choix_pion-2]][position[2*choix_pion-1]] == 1){
 
+      std::cout << 2*choix_pion-2 << '\n';
+      std::cout << 2*choix_pion-1 << '\n';
+
+
+      //affichage = affichage + "|" + "<" + "   "; //phase retour
+      PionX = position[2*choix_pion-2];
+      PionY = position[2*choix_pion-1];
+      aff_plateau[PionX][PionY] = ">";
+
+    }
+
+  std::cout << "-----------------------------" << '\n';
+  std::cout << "| "<< aff_plateau[0][0] << " | "<<  aff_plateau[0][1] << " | "<< aff_plateau[0][2] << " | "<<  aff_plateau[0][3] << " | "<< aff_plateau[0][4] << " | "<< aff_plateau[0][5] << " | "<< aff_plateau[0][6] << " | "<<'\n';
+  std::cout << "|   |   |   |   |   |   |   |" << '\n';
+  std::cout << "-----------------------------" << '\n';
+  std::cout << "| "<< aff_plateau[1][0] << " | "<<  aff_plateau[1][1] << " | "<< aff_plateau[1][2] << " | "<<  aff_plateau[1][3] << " | "<< aff_plateau[1][4] << " | "<< aff_plateau[1][5] << " | "<< aff_plateau[1][6] << " | "<<'\n';
+  std::cout << "|   |   |   |   |   |   |   |" << '\n';
+  std::cout << "-----------------------------" << '\n';
+  std::cout << "| "<< aff_plateau[2][0] << " | "<<  aff_plateau[2][1] << " | "<< aff_plateau[2][2] << " | "<<  aff_plateau[2][3] << " | "<< aff_plateau[2][4] << " | "<< aff_plateau[2][5] << " | "<< aff_plateau[2][6] << " | "<<'\n';
+  std::cout << "|   |   |   |   |   |   |   |" << '\n';
+  std::cout << "-----------------------------" << '\n';
+  std::cout << "| "<< aff_plateau[3][0] << " | "<<  aff_plateau[3][1] << " | "<< aff_plateau[3][2] << " | "<<  aff_plateau[3][3] << " | "<< aff_plateau[3][4] << " | "<< aff_plateau[3][5] << " | "<< aff_plateau[3][6] << " | "<<'\n';
+  std::cout << "|   |   |   |   |   |   |   |" << '\n';
+  std::cout << "-----------------------------" << '\n';
+  std::cout << "| "<< aff_plateau[4][0] << " | "<<  aff_plateau[4][1] << " | "<< aff_plateau[4][2] << " | "<<  aff_plateau[4][3] << " | "<< aff_plateau[4][4] << " | "<< aff_plateau[4][5] << " | "<< aff_plateau[4][6] << " | "<<'\n';
+  std::cout << "|   |   |   |   |   |   |   |" << '\n';
+  std::cout << "-----------------------------" << '\n';
+  std::cout << "| "<< aff_plateau[5][0] << " | "<<  aff_plateau[5][1] << " | "<< aff_plateau[5][2] << " | "<<  aff_plateau[5][3] << " | "<< aff_plateau[5][4] << " | "<< aff_plateau[5][5] << " | "<< aff_plateau[5][6] << " | "<<'\n';
+  std::cout << "|   |   |   |   |   |   |   |" << '\n';
+  std::cout << "-----------------------------" << '\n';
+  std::cout << "| "<< aff_plateau[6][0] << " | "<<  aff_plateau[6][1] << " | "<< aff_plateau[6][2] << " | "<<  aff_plateau[6][3] << " | "<< aff_plateau[6][4] << " | "<< aff_plateau[6][5] << " | "<< aff_plateau[6][6] << " | "<<'\n';
+  std::cout << "|   |   |   |   |   |   |   |" << '\n';
+  std::cout << "-----------------------------" << '\n';
 }

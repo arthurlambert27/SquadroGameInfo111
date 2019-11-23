@@ -8,7 +8,9 @@
  * @return plateau qui retourne l'état du jeu suite au déplacement.
  * */
  std::tuple<std::vector<std::vector<int>>,std::vector<int>> deplace(std::vector<std::vector<int>> plateau, std::vector<int> etatPions, int joueur, int noPion ){
-	 std::vector<int> pos = posPions(plateau);
+   std::vector<int> PionsPris;
+   PionsPris = std::vector<int>(1);
+   std::vector<int> pos = posPions(plateau);
 	 std::vector<int> pionDevantZoneMouvement = pionsDevantZoneMouvement(plateau, etatPions, joueur, noPion);
 		if(joueur == 1){
 
@@ -46,6 +48,7 @@
 				std::vector<int> pionsDev= pionsDevant(plateau, etatPions, joueur, noPion);
 				int compteur = 0;
 				int sauteSurAdversaire = 0;
+
 				for(int i = 0; i<pionsDev.size(); i ++){
 					if(pionsDev[i] == 0 and sauteSurAdversaire == 1){
 						i = 8;
@@ -53,15 +56,31 @@
 						if(etatPions[noPion - 1]== 0){
 
 							plateau[posy][posx + compteur] = 1;
+              for(int k=0 ; k<PionsPris.size(); k++){
+                plateau[posy][posx+k] = 0;
+                plateau[6][posx+k] = 2;
+              }
+              if (posx+compteur == 6){
+                etatPions[noPion - 1] = 1;
+              }
+
+
 						}
 						else{
 							plateau[posy][posx - compteur] = 1;
+              for(int k=0 ; k<PionsPris.size(); k++){
+                plateau[posy][posx+k] = 0;
+                plateau[6][posx+k] = 2;
+              }
+
 						}
+            PionsPris.clear();
 
 					}
 					else if(pionsDev[i] == 1 and sauteSurAdversaire == 0){
 						compteur = compteur + 1;
 						sauteSurAdversaire = 1;
+            PionsPris.push_back(i);
 					}
 					else{
 						compteur = compteur + 1;
@@ -103,29 +122,48 @@
 					std::vector<int> pionsDev= pionsDevant(plateau, etatPions, joueur, noPion);
 					int compteur = 0;
 					int sauteSurAdversaire = 0;
+
 					for(int i = 0; i<pionsDev.size(); i ++){
 						if(pionsDev[i] == 0 and sauteSurAdversaire == 1){
 							i = 8;
 							compteur = compteur + 1;
 							if(etatPions[4 + noPion]== 0){
 								plateau[posy - compteur][posx] = 2;
+                for(int k=0 ; k<PionsPris.size(); k++){
+                  plateau[posy+k][posx] = 0;
+                  plateau[posy+k][0] = 1;
+                }
+                if (posy-compteur == 0){
+                  etatPions[4 + noPion] = 1;
+                }
+
+
 							}
 							else{
 								plateau[posy + compteur][posx] = 2;
+                for(int k=0 ; k<PionsPris.size(); k++){
+                  plateau[posy+k][posx] = 0;
+                  plateau[posy+k][0] = 1;
+                }
+
+
 							}
 
 						}
 						else if(pionsDev[i] == 1 and sauteSurAdversaire == 0){
 							compteur = compteur + 1;
 							sauteSurAdversaire = 1;
+              PionsPris.push_back(i);
 						}
 						else{
 							compteur = compteur + 1;
 						}
 					}
 
+
 			}
 				plateau[posy][posx] = 0;
+        PionsPris.clear();
 
 				}
 
