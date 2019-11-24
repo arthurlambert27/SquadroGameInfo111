@@ -26,7 +26,7 @@ int main(){
 		for(int i =0; i<etatPions.size(); i++){
 			etatPions[i] = 0;
 		}
-    
+  std::cout << "OIZzdzdzdzdzHDI" << '\n';
 	jeu(plateau, etatPions);
 
 

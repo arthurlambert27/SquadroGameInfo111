@@ -1,4 +1,5 @@
 #include "deplacement.h"
+#include <iostream>
 
 /*
  * Permet de bouger un jeton
@@ -7,10 +8,12 @@
  * @param noPion qui jeton qui est le jeton a déplacé (de haut en bas pour le joueur 1 et de gauche a droite pour le joueur 2)
  * @return plateau qui retourne l'état du jeu suite au déplacement.
  * */
- std::tuple<std::vector<std::vector<int>>,std::vector<int>> deplace(std::vector<std::vector<int>> plateau, std::vector<int> etatPions, int joueur, int noPion ){
+ std::tuple<std::vector<std::vector<int>>,std::vector<int>, int, int>  deplace(std::vector<std::vector<int>> plateau, std::vector<int> etatPions, int joueur, int noPion ){
    std::vector<int> PionsPris;
    PionsPris = std::vector<int>(1);
    std::vector<int> pos = posPions(plateau);
+   int reste_pion_j1 = 5;
+   int reste_pion_j2 = 5;
 	 std::vector<int> pionDevantZoneMouvement = pionsDevantZoneMouvement(plateau, etatPions, joueur, noPion);
 		if(joueur == 1){
 
@@ -53,25 +56,52 @@
 					if(pionsDev[i] == 0 and sauteSurAdversaire == 1){
 						i = 8;
 						compteur = compteur + 1;
-						if(etatPions[noPion - 1]== 0){
+						if(etatPions[noPion - 1]== 0){//pion j1 dans la phase aller
 
 							plateau[posy][posx + compteur] = 1;
               for(int k=0 ; k<PionsPris.size(); k++){
-                plateau[posy][posx+k] = 0;
-                plateau[6][posx+k] = 2;
+
+                if(etatPions[4 + posx+k]== 1){ // si le pion du j2 est sur le retour
+                  plateau[posy][posx+k] = 0;
+                  plateau[0][posx+k] = 2; //on déplace le pion du joueur2
+
+
+                }
+                else if(etatPions[4 + posx+k]== 0){ // pareil pour l'aller
+                  plateau[posy][posx+k] = 0;
+                  plateau[6][posx+k] = 2;
+                }
+
+
+
               }
-              if (posx+compteur == 6){
-                etatPions[noPion - 1] = 1;
+              if (posx+compteur == 6){ //si le pion va arriver au bord du plateau
+                etatPions[noPion - 1] = 1;// on change son état
               }
+              reste_pion_j1= reste_pion_j1-1; //condition de victoire à changer
 
 
 						}
-						else{
+						else{ //si le pion est sur le retour
 							plateau[posy][posx - compteur] = 1;
-              for(int k=0 ; k<PionsPris.size(); k++){
-                plateau[posy][posx+k] = 0;
-                plateau[6][posx+k] = 2;
+
+              for(int k=0 ; k<PionsPris.size(); k++){//distance entre notre pion et celui qui est pàris
+                if(etatPions[4 + posx-k]== 1){ //si le pion du j2 est sur le retour
+
+                  plateau[posy][posx-k] = 0;
+                  plateau[0][posx-k] = 2; //on place le pions pris au j2 en haut
+
+
+
+                }
+                else if(etatPions[4 + posx-k]== 0){//si le pion du j2 est sur l'aller
+
+                  std::cout << k << '\n';
+                  plateau[posy][posx+k] = 0;
+                  plateau[6][posx+k-1] = 2; //on place le pions pris au j2 en bas
+                }
               }
+              reste_pion_j1= reste_pion_j1-1;
 
 						}
             PionsPris.clear();
@@ -80,7 +110,7 @@
 					else if(pionsDev[i] == 1 and sauteSurAdversaire == 0){
 						compteur = compteur + 1;
 						sauteSurAdversaire = 1;
-            PionsPris.push_back(i);
+            PionsPris.push_back(i); //si il y a un pion devant, on l'ajoute à PionPris
 					}
 					else{
 						compteur = compteur + 1;
@@ -128,25 +158,41 @@
 							i = 8;
 							compteur = compteur + 1;
 							if(etatPions[4 + noPion]== 0){
-								plateau[posy - compteur][posx] = 2;
+
+
                 for(int k=0 ; k<PionsPris.size(); k++){
-                  plateau[posy+k][posx] = 0;
-                  plateau[posy+k][0] = 1;
+                  std::cout << k << '\n';
+                  if(etatPions[posy-k]== 1){
+                    plateau[posy-k-1][posx] = 0;
+                    plateau[posy-k-1][6] = 1;
+
+
+                  }
+                  else if (etatPions[posy-k]== 0){
+                    std::cout << k << '\n';
+
+
+                    plateau[posy-k-1][posx] = 0;
+                    plateau[posy-k-1][0] = 1;
+                  }
+                  plateau[posy - compteur][posx] = 2;
                 }
                 if (posy-compteur == 0){
                   etatPions[4 + noPion] = 1;
                 }
 
+                reste_pion_j2= reste_pion_j2-1;
 
 							}
 							else{
 								plateau[posy + compteur][posx] = 2;
                 for(int k=0 ; k<PionsPris.size(); k++){
-                  plateau[posy+k][posx] = 0;
-                  plateau[posy+k][0] = 1;
+
+                  plateau[posy-k-1][posx] = 0;
+                  plateau[posy-k-1][0] = 1;
                 }
 
-
+                reste_pion_j2= reste_pion_j2-1;
 							}
 
 						}
@@ -169,7 +215,7 @@
 
 
 
-			std::tuple<std::vector<std::vector<int>>,std::vector<int>> plateau1 (plateau, etatPions);
+			std::tuple<std::vector<std::vector<int>>,std::vector<int>, int, int> plateau1 (plateau, etatPions, reste_pion_j1, reste_pion_j2);
 
 		return plateau1;
 	 }
