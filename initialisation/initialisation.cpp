@@ -43,6 +43,7 @@ std::vector<std::vector<int>> creationPlateauInitial(){
 */
 int jeu(std::vector<std::vector<int>> plateau, std::vector<int> etatPions){
 
+
 		int tour_joueur = 1;
 		int choix_pion = 0;
     std::vector<std::vector<std::string>> aff_plateau;
@@ -69,7 +70,7 @@ int jeu(std::vector<std::vector<int>> plateau, std::vector<int> etatPions){
 
     plateau1 = make_tuple(plateau, etatPions, 5, 5);
 
-		affichePlateauV3(plateau, aff_plateau, etatPions, choix_pion);
+		affichePlateauV3(plateau, aff_plateau, etatPions, 1);
 		while(std::get<2>(plateau1) > 0 or std::get<3>(plateau1) > 0){
 			 std::cout << "Entrez un coup" << std::endl;
 			std::cin >> choix_pion;

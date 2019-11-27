@@ -57,6 +57,7 @@ void affichePlateauV3(std::vector<std::vector<int>> plateau,std::vector<std::vec
                 std::cout << std::endl;
             }
 
+
   if (etatPions[choix_pion+4]== 1 and plateau[position[choix_pion+13]][position[choix_pion+14]] == 2 ){
 
 
@@ -83,7 +84,7 @@ if (etatPions[choix_pion-1]== 1 and  plateau[position[2*choix_pion-2]][position[
 
   }
   else if (etatPions[choix_pion-1]== 0 and  plateau[position[2*choix_pion-2]][position[2*choix_pion-1]] == 1){
-    
+
       std::cout << 2*choix_pion-2 << '\n';
       std::cout << 2*choix_pion-1 << '\n';
 
