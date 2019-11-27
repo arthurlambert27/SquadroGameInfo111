@@ -60,7 +60,16 @@ void gui(){
           // Close window: exit
           if (event.type == sf::Event::Closed)
               window.close();
+
       }
+
+      //Si on appuie sur ESC
+      if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+{
+    menu(window);
+}
+
+
 
       // Remplit la fen^etre de blancwindow.clear(Color::White);
       window.clear(sf::Color::White);
@@ -374,6 +383,7 @@ void gui(){
       window.draw(pion8);
       window.draw(pion9);
       window.draw(pion10);
+
       window.display();
 
 
@@ -386,5 +396,24 @@ void gui(){
 
 
 
+
+}
+
+void menu(sf::RenderWindow &window){
+  window.clear(sf::Color::White);
+  window.display();
+  std::this_thread::sleep_for(std::chrono::nanoseconds(400000000));
+  int decision = 0;
+  while(decision == 0){
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+{
+    decision = 1;
+    window.close();
+}
+if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+{
+decision = 1;
+}
+  }
 
 }

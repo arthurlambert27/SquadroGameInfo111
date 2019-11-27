@@ -19,6 +19,7 @@
 
 
 void gui();
+void menu(sf::RenderWindow &window);
 
 
 
