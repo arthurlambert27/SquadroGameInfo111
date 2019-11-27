@@ -7,9 +7,11 @@
 #include "mouvement/mouvement.h"
 #include "deplacement/deplacement.h"
 #include "initialisation/initialisation.h"
-
-
-
+#include "graphique/graphique.h"
+#include <SFML/Graphics.hpp>
+#include <stdlib.h>
+#include <chrono>
+#include <thread>
 
 
 
@@ -19,17 +21,6 @@
 
 
 int main(){
-
-    std::vector<std::vector<int>> plateau = creationPlateauInitial();
-		std::vector<int> etatPions;
-		etatPions = std::vector<int>(10);
-		for(int i =0; i<etatPions.size(); i++){
-			etatPions[i] = 0;
-		}
-  std::cout << "OIZzdzdzdzdzHDI" << '\n';
-	jeu(plateau, etatPions);
-
-
-
+    gui();
     return 0;
 }
