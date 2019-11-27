@@ -61,13 +61,16 @@
 							plateau[posy][posx + compteur] = 1;
               for(int k=0 ; k<PionsPris.size(); k++){
 
-                if(etatPions[4 + posx+k]== 1){
-                  if(k==0){
+
+
+                if(etatPions[5 + posx+PionsPris[k]]== 1){
+                  if(PionsPris[k]==0){
 
                     plateau[posy][posx+1] = 0;
                     plateau[0][posx+1] = 2;
                   }
                   else{
+
                     plateau[posy][posx+PionsPris[k]] = 0;
                     plateau[0][posx+PionsPris[k]] = 2;
                   }  // si le pion du j2 est sur le retour
@@ -102,8 +105,9 @@
 							plateau[posy][posx - compteur] = 1;
 
               for(int k=0 ; k<PionsPris.size(); k++){//distance entre notre pion et celui qui est pàris
-                if(etatPions[4 + posx-k]== 1){//si le pion du j2 est sur le retour
-                  if(k==0){
+                if(etatPions[3 + posx+PionsPris[k]]== 1){//si le pion du j2 est sur le retour
+
+                  if(PionsPris[k]==0){
 
                     plateau[posy][posx-1] = 0;
                     plateau[0][posx-1] = 2;
@@ -169,13 +173,6 @@
 					posx = noPion;
 				}
 			}
-      std::cout << "test" << '\n';
-      for(int k=0 ; k<pionDevantZoneMouvement.size(); k++){
-        std::cout << pionDevantZoneMouvement.size()<< std::endl;
-        std::cout << pionDevantZoneMouvement[k]<< std::endl;
-
-        std::cout << "ok" << std::endl;
-      }
 
 			if(tabIsNul(pionDevantZoneMouvement)){
 
@@ -214,7 +211,8 @@
 
 
                   }
-                  else if (etatPions[posy-PionsPris[k]-2]== 0){//pion j1 phase aller
+                  else if (etatPions[posy-PionsPris[k]-2]== 0){
+                    //pion j1 phase aller
 
 
 

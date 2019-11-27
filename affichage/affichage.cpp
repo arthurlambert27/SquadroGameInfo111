@@ -38,6 +38,7 @@ void affichePlateauV3(std::vector<std::vector<int>> plateau,std::vector<std::vec
         }
         else if (plateau[i][j]==2 and etatPions[j+4]==1){
           aff_plateau[i][j] = "V";
+
         }
         else if (plateau[i][j]!=2 or plateau[i][j]!=1){
           aff_plateau[i][j] = ".";
@@ -58,14 +59,19 @@ void affichePlateauV3(std::vector<std::vector<int>> plateau,std::vector<std::vec
             }
 
 
-  if (etatPions[choix_pion+4]== 1 and plateau[position[choix_pion+13]][position[choix_pion+14]] == 2 ){
+
+
+/**
+  if (etatPions[choix_pion+4]== 1 and plateau[position[choix_pion+10]][position[choix_pion+11]] == 2 ){
+
+
 
 
     PionX = position[choix_pion+13];
     PionY = position[choix_pion+14];
-//std::cout << comptePion2 << '\n';
-//std::cout << position[comptePion2+13]<< '\n';
-//std::cout << position[comptePion2+14]<< '\n';
+    std::cout << PionX << '\n';
+    std::cout << PionY << '\n';
+
   aff_plateau[PionX][PionY] = "V";
 }
 else if (etatPions[choix_pion+4]== 0 and plateau[position[choix_pion+13]][position[choix_pion+14]] == 2 ){
@@ -85,8 +91,7 @@ if (etatPions[choix_pion-1]== 1 and  plateau[position[2*choix_pion-2]][position[
   }
   else if (etatPions[choix_pion-1]== 0 and  plateau[position[2*choix_pion-2]][position[2*choix_pion-1]] == 1){
 
-      std::cout << 2*choix_pion-2 << '\n';
-      std::cout << 2*choix_pion-1 << '\n';
+
 
 
       //affichage = affichage + "|" + "<" + "   "; //phase retour
@@ -95,7 +100,7 @@ if (etatPions[choix_pion-1]== 1 and  plateau[position[2*choix_pion-2]][position[
       aff_plateau[PionX][PionY] = ">";
 
     }
-
+*/
   std::cout << "-----------------------------" << '\n';
   std::cout << "| "<< aff_plateau[0][0] << " | "<<  aff_plateau[0][1] << " | "<< aff_plateau[0][2] << " | "<<  aff_plateau[0][3] << " | "<< aff_plateau[0][4] << " | "<< aff_plateau[0][5] << " | "<< aff_plateau[0][6] << " | "<<'\n';
   std::cout << "|   |   |   |   |   |   |   |" << '\n';
