@@ -1,4 +1,5 @@
-
+#include <iostream>
+#include <string>
 #include <vector>
 #include <tuple>
 
@@ -21,6 +22,24 @@
 
 
 int main(){
-    gui();
+  int choix = 0;
+    std::cout << "Bonjour, voici notre jeu Squadro pour le projet du semestre 1 d'info111. \n\n\n";
+    std::cout << "Menu:\n";
+    std::cout << "1. GUI\n";
+    std::cout << "2. Console\n";
+    std::cin >> choix;
+
+    if(choix == 1){
+      gui();
+    }
+    else if(choix == 2){
+      std::vector<std::vector<int>> plateau = creationPlateauInitial();
+		std::vector<int> etatPions;
+		etatPions = std::vector<int>(10);
+		for(int i =0; i<etatPions.size(); i++){
+			etatPions[i] = 0;
+		}
+	jeu(plateau, etatPions);
+    }
     return 0;
 }
