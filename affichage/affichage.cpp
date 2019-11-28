@@ -57,9 +57,7 @@ void affichePlateauV3(std::vector<std::vector<int>> plateau,std::vector<std::vec
                 }
                 std::cout << std::endl;
             }
-
-
-
+          std::cout << fnErreur(plateau, etatPions) << "\n";
 
 /**
   if (etatPions[choix_pion+4]== 1 and plateau[position[choix_pion+10]][position[choix_pion+11]] == 2 ){

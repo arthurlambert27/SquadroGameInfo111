@@ -69,7 +69,7 @@ int jeu(std::vector<std::vector<int>> plateau, std::vector<int> etatPions){
 		std::tuple<std::vector<std::vector<int>>, std::vector<int>, int, int> plateau1;
 
     plateau1 = make_tuple(plateau, etatPions, 5, 5);
-
+        
 		affichePlateauV3(plateau, aff_plateau, etatPions, 1);
 		while(std::get<2>(plateau1) > 0 or std::get<3>(plateau1) > 0){
 			 std::cout << "Entrez un coup" << std::endl;

@@ -33,7 +33,7 @@ int main(){
       gui();
     }
     else if(choix == 2){
-      std::vector<std::vector<int>> plateau = creationPlateauInitial();
+    std::vector<std::vector<int>> plateau = creationPlateauInitial();
 		std::vector<int> etatPions;
 		etatPions = std::vector<int>(10);
 		for(int i =0; i<etatPions.size(); i++){
