@@ -19,6 +19,10 @@ void gui(){
    int height = window.getSize().y;
    int width = window.getSize().x;
 
+   sf::Music music;
+music.openFromFile("music.wav");
+music.play();
+
 
    sf::Texture textureSoldat;
      if (!textureSoldat.loadFromFile("bleuEpee.png"));
@@ -96,7 +100,7 @@ void gui(){
         pion1.setTexture(textureSoldat4);
       }
 
-      pion1.scale(sf::Vector2f(0.3f, 0.3f));
+      pion1.scale(sf::Vector2f(0.5f, 0.5f));
 
 
 
@@ -111,7 +115,7 @@ void gui(){
       else{
         pion2.setTexture(textureSoldat4);
       }
-      pion2.scale(sf::Vector2f(0.3f, 0.3f));
+      pion2.scale(sf::Vector2f(0.5f, 0.5f));
 
 
 
@@ -127,7 +131,7 @@ void gui(){
       else{
         pion3.setTexture(textureSoldat4);
       }
-      pion3.scale(sf::Vector2f(0.3f, 0.3f));
+      pion3.scale(sf::Vector2f(0.5f, 0.5f));
 
 
 
@@ -142,7 +146,7 @@ void gui(){
       else{
         pion4.setTexture(textureSoldat4);
       }
-      pion4.scale(sf::Vector2f(0.3f, 0.3f));
+      pion4.scale(sf::Vector2f(0.5f, 0.5f));
 
 
 
@@ -157,7 +161,7 @@ void gui(){
       else{
         pion5.setTexture(textureSoldat4);
       }
-      pion5.scale(sf::Vector2f(0.3f, 0.3f));
+      pion5.scale(sf::Vector2f(0.5f, 0.5f));
 
 
 
@@ -172,7 +176,7 @@ void gui(){
       else{
         pion6.setTexture(textureSoldat5);
       }
-      pion6.scale(sf::Vector2f(0.3f, 0.3f));
+      pion6.scale(sf::Vector2f(0.5f, 0.5f));
 
       sf::Sprite pion7;
       if(abs(ptnDeMouvement(2, 2, etatPions)) == 1){
@@ -184,7 +188,7 @@ void gui(){
       else{
         pion7.setTexture(textureSoldat5);
       }
-      pion7.scale(sf::Vector2f(0.3f, 0.3f));
+      pion7.scale(sf::Vector2f(0.5f, 0.5f));
 
       sf::Sprite pion8;
       if(abs(ptnDeMouvement(3, 2, etatPions)) == 1){
@@ -196,7 +200,7 @@ void gui(){
       else{
         pion8.setTexture(textureSoldat5);
       }
-      pion8.scale(sf::Vector2f(0.3f, 0.3f));
+      pion8.scale(sf::Vector2f(0.5f, 0.5f));
 
       sf::Sprite pion9;
       if(abs(ptnDeMouvement(4, 2, etatPions)) == 1){
@@ -208,7 +212,7 @@ void gui(){
       else{
         pion9.setTexture(textureSoldat5);
       }
-      pion9.scale(sf::Vector2f(0.3f, 0.3f));
+      pion9.scale(sf::Vector2f(0.5f, 0.5f));
 
       sf::Sprite pion10;
       if(abs(ptnDeMouvement(5, 2, etatPions)) == 1){
@@ -220,7 +224,7 @@ void gui(){
       else{
         pion10.setTexture(textureSoldat5);
       }
-      pion10.scale(sf::Vector2f(0.3f, 0.3f));
+      pion10.scale(sf::Vector2f(0.5f, 0.5f));
 
 
       sf::VertexArray lignesVerticale(sf::Lines, 14);
@@ -252,41 +256,41 @@ void gui(){
           if (plateau[y][x] == 1 ){
             if(y == 1){
 
-              pion1.setPosition(sf::Vector2f(  (x*width)/7   , (y*height)/7     ));
+              pion1.setPosition(sf::Vector2f(  (x*width)/7 +((width/7)*0.15)  , (y*height)/7  +((height/7)*0.15)    ));
             }
             else if(y == 2){
 
-              pion2.setPosition(sf::Vector2f( (x*width)/7   , (y*height)/7     ));
+              pion2.setPosition(sf::Vector2f( (x*width)/7  +((width/7)*0.15)  , (y*height)/7  +((height/7)*0.15)    ));
             }
             else if(y == 3){
 
-              pion3.setPosition(sf::Vector2f( (x*width)/7   , (y*height)/7     ));
+              pion3.setPosition(sf::Vector2f( (x*width)/7 +((width/7)*0.15)  , (y*height)/7   +((height/7)*0.15)   ));
             }
             else if(y == 4){
 
-              pion4.setPosition(sf::Vector2f( (x*width)/7   , (y*height)/7     ));
+              pion4.setPosition(sf::Vector2f( (x*width)/7  +((width/7)*0.15) , (y*height)/7   +((height/7)*0.15)   ));
             }
             else if(y == 5){
 
-              pion5.setPosition(sf::Vector2f( (x*width)/7   , (y*height)/7     ));
+              pion5.setPosition(sf::Vector2f( (x*width)/7  +((width/7)*0.15) , (y*height)/7   +((height/7)*0.15)   ));
             }
 
           }
           else if (plateau[y][x]==2){
             if(x == 1){
-              pion6.setPosition(sf::Vector2f( (x*width)/7   ,  (y*height)/7     ));
+              pion6.setPosition(sf::Vector2f( (x*width)/7 +((width/7)*0.15)  ,  (y*height)/7  +((height/7)*0.15)     ));
             }
             else if (x == 2){
-              pion7.setPosition(sf::Vector2f( (x*width)/7   ,  (y*height)/7     ));
+              pion7.setPosition(sf::Vector2f( (x*width)/7  +((width/7)*0.15) ,  (y*height)/7   +((height/7)*0.15)    ));
             }
             else if (x == 3){
-              pion8.setPosition(sf::Vector2f( (x*width)/7   ,  (y*height)/7     ));
+              pion8.setPosition(sf::Vector2f( (x*width)/7  +((width/7)*0.15) ,  (y*height)/7  +((height/7)*0.15)     ));
             }
             else if (x ==4){
-              pion9.setPosition(sf::Vector2f( (x*width)/7   ,  (y*height)/7     ));
+              pion9.setPosition(sf::Vector2f( (x*width)/7  +((width/7)*0.15) ,  (y*height)/7  +((height/7)*0.15)     ));
             }
             else if(x == 5){
-              pion10.setPosition(sf::Vector2f( (x*width)/7   ,  (y*height)/7     ));
+              pion10.setPosition(sf::Vector2f( (x*width)/7  +((width/7)*0.15) ,  (y*height)/7  +((height/7)*0.15)     ));
             }
           }
         }
@@ -385,7 +389,7 @@ void gui(){
       window.draw(pion8);
       window.draw(pion9);
       window.draw(pion10);
-
+      pastilleCouleurJoueur(window, tour);
       window.display();
 
 
@@ -414,6 +418,7 @@ if (!font.loadFromFile("font.ttf"))
   text.setFillColor(sf::Color::Red);
   text.setStyle(sf::Text::Bold | sf::Text::Underlined);
   text.setString("Esc: Quitter\nFleche gauche: Retour");
+  text.setPosition(sf::Vector2f(  window.getSize().x/2   , window.getSize().y/2    ));
   window.draw(text);
   window.display();
   std::this_thread::sleep_for(std::chrono::nanoseconds(400000000));
@@ -429,5 +434,28 @@ if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 decision = 1;
 }
   }
+
+}
+
+
+void pastilleCouleurJoueur(sf::RenderWindow &window, int tour){
+  sf::Font font;
+if (!font.loadFromFile("font.ttf"))
+{
+  // error...
+}
+  sf::Text text;
+  text.setFont(font);
+  text.setCharacterSize(15);
+  text.setFillColor(sf::Color::Red);
+  text.setStyle(sf::Text::Bold | sf::Text::Underlined);
+  if(tour%2 == 0){
+    text.setString("Joueur 1");
+  }
+  else if(tour%2 == 1){
+    text.setString("Joueur 2");
+  }
+  text.setPosition(sf::Vector2f(  0   , 10   ));
+  window.draw(text);
 
 }
