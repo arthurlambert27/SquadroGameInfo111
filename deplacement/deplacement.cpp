@@ -53,6 +53,7 @@
 				int sauteSurAdversaire = 0;
 
 				for(int i = 0; i<pionsDev.size(); i ++){
+          
 					if(pionsDev[i] == 0 and sauteSurAdversaire == 1){
 						i = 8;
 						compteur = compteur + 1;
@@ -221,14 +222,20 @@
 
 
                 for(int k=0 ; k<PionsPris.size(); k++){
-
-                  if(etatPions[posy-PionsPris[k]-1]== 1){// si j1 phase retour
+                  std::cout << "ahha" << '\n';
+                  std::cout << k << '\n';
+                  std::cout << posy-PionsPris[k]-2 << '\n';
+                  std::cout << etatPions[posy-PionsPris[k]-2] << '\n';
+                  std::cout << posy-PionsPris[k] << '\n';
+                  std::cout << PionsPris[k] << '\n';
+                  if(etatPions[posy-PionsPris[k]-2]== 1){// si j1 phase retour
 
                     if(PionsPris[k]==0){
                     plateau[posy-1][posx] = 0;
                     plateau[posy-1][6] = 1;
                   }
                   else{
+
                     plateau[posy-PionsPris[k]-1][posx] = 0;
                     plateau[posy-PionsPris[k]-1][6] = 1;
                   }
@@ -237,15 +244,18 @@
 
 
                   }
-                  else if (etatPions[posy-PionsPris[k]-1]== 0){//pion j1 phase aller
+                  else if (etatPions[posy-PionsPris[k]-2]== 0){//pion j1 phase aller
+
 
 
 
                     if(PionsPris[k]==0){
+
                     plateau[posy-1][posx] = 0;
                     plateau[posy-1][0] = 1;
                   }
                   else{
+
                     plateau[posy-PionsPris[k]-1][posx] = 0;
                     plateau[posy-PionsPris[k]-1][0] = 1;
                   }
