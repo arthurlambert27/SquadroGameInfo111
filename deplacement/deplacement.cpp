@@ -148,6 +148,9 @@
 						compteur = compteur + 1;
 						sauteSurAdversaire = 1;
             PionsPris.push_back(i); //si il y a un pion devant, on l'ajoute à PionPris
+            for(int k=0 ; k<PionsPris.size(); k++){
+              std::cout << PionsPris[k] << '\n';
+          }
 					}
 					else{
 						compteur = compteur + 1;
@@ -195,6 +198,13 @@
 					int sauteSurAdversaire = 0;
 
 					for(int i = 0; i<pionsDev.size(); i ++){
+            if(pionsDev[i] == 1 and sauteSurAdversaire <= 1){
+              PionsPris.push_back(i);
+
+            }
+
+
+
 						if(pionsDev[i] == 0 and sauteSurAdversaire == 1){
 							i = 8;
 							compteur = compteur + 1;
@@ -202,11 +212,17 @@
 
 
                 for(int k=0 ; k<PionsPris.size(); k++){
-                
+
                   if(etatPions[posy-PionsPris[k]]== 1){// si j1 phase retour
 
+                    if(PionsPris[k]==0){
+                    plateau[posy-1][posx] = 0;
+                    plateau[posy-1][6] = 1;
+                  }
+                  else{
                     plateau[posy-PionsPris[k]-1][posx] = 0;
                     plateau[posy-PionsPris[k]-1][6] = 1;
+                  }
 
                     //1 1 3 1 1 1 2 3 3 3 5
 
@@ -283,8 +299,10 @@
 						else if(pionsDev[i] == 1 and sauteSurAdversaire == 0){
 							compteur = compteur + 1;
 							sauteSurAdversaire = 1;
+
               PionsPris.push_back(i);
-						}
+
+          }
 						else{
 							compteur = compteur + 1;
 						}
@@ -295,10 +313,15 @@
 
 
 				plateau[posy][posx] = 0;
-        PionsPris.clear();
-        PionsPris.resize(0);
+
 
 				}
+        std::cout << "abcd" << '\n';
+        for(int k=0 ; k<PionsPris.size(); k++){
+          std::cout << PionsPris[k] << '\n';
+      }
+        PionsPris.clear();
+        PionsPris.resize(0);
 
 
 
