@@ -13,6 +13,8 @@ void gui(){
 
     std::tuple<std::vector<std::vector<int>>, std::vector<int>, int, int> plateau1;
 
+
+
    sf::RenderWindow window(sf::VideoMode(1000, 1000),  "SFML window" /*,sf::Style::Fullscreen*/);
    int height = window.getSize().y;
    int width = window.getSize().x;
@@ -400,7 +402,19 @@ void gui(){
 }
 
 void menu(sf::RenderWindow &window){
-  window.clear(sf::Color::White);
+  sf::Font font;
+if (!font.loadFromFile("font.ttf"))
+{
+  // error...
+}
+    window.clear(sf::Color::White);
+  sf::Text text;
+  text.setFont(font);
+  text.setCharacterSize(24);
+  text.setFillColor(sf::Color::Red);
+  text.setStyle(sf::Text::Bold | sf::Text::Underlined);
+  text.setString("Esc: Quitter\nFleche gauche: Retour");
+  window.draw(text);
   window.display();
   std::this_thread::sleep_for(std::chrono::nanoseconds(400000000));
   int decision = 0;
