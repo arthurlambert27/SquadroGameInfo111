@@ -202,7 +202,7 @@
 
 
                 for(int k=0 ; k<PionsPris.size(); k++){
-
+                
                   if(etatPions[posy-PionsPris[k]]== 1){// si j1 phase retour
 
                     plateau[posy-PionsPris[k]-1][posx] = 0;
@@ -212,11 +212,15 @@
 
 
                   }
-                  else if (etatPions[posy-PionsPris[k]-2]== 0){//pion j1 phase aller
+                  else if (etatPions[posy-PionsPris[k]-1]== 0){//pion j1 phase aller
 
 
 
                     if(PionsPris[k]==0){
+                    plateau[posy-1][posx] = 0;
+                    plateau[posy-1][0] = 1;
+                  }
+                  else{
                     plateau[posy-PionsPris[k]-1][posx] = 0;
                     plateau[posy-PionsPris[k]-1][0] = 1;
                   }
