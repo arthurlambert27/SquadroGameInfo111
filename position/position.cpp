@@ -131,7 +131,13 @@ std::vector<int> posPions(std::vector<std::vector<int>> plateau){
   	int ptnMouvement = ptnDeMouvement(noPion, joueur, etatPions);
   	std::vector<int> pionDevantZoneMouvement;
   	for(int i = 0; i<std::abs(ptnMouvement); i++){
-  		pionDevantZoneMouvement.push_back(pionDevant[i]);
+			if(pionDevant[i]<0 or pionDevant[i]>= 2){
+
+			}
+			else{
+				pionDevantZoneMouvement.push_back(pionDevant[i]);
+			}
+
   	}
 
 
