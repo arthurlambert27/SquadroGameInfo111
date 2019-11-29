@@ -14,8 +14,9 @@
    std::vector<int> pos = posPions(plateau);
    int reste_pion_j1 = 5;
    int reste_pion_j2 = 5;
-   int arrivee_j1 = 0;
-   int arrivee_j2 = 6;
+   int arrivee_j1 = 100;
+   int arrivee_j2 = 600;
+   std::tuple<std::vector<std::vector<int>>,std::vector<int>, int, int> plateau1 (plateau, etatPions, reste_pion_j1, reste_pion_j2);
 
 
 	 std::vector<int> pionDevantZoneMouvement = pionsDevantZoneMouvement(plateau, etatPions, joueur, noPion);
@@ -48,14 +49,22 @@
 				if(6 <= posx + ptnMouvement){
 
 					plateau[posy][6] = 1;
+
 					etatPions[noPion - 1 ] = 1;
           arrivee_j1 = 6;
 
 				}
+
 				else{
 					plateau[posy][posx+ptnMouvement] = 1;
           arrivee_j1 = posx+ptnMouvement;
 				}
+        if(0 >= posx and etatPions[noPion-1] == 1){
+
+
+
+          arrivee_j1 = 0;
+        }
 			}
 
 
@@ -177,6 +186,29 @@
 			plateau[posy][posx]=0;
       PionsPris.clear();
       PionsPris.resize(0);
+      std::cout << "arrivee_j1" << '\n';
+      std::cout << arrivee_j1 << '\n';
+
+
+
+              if(arrivee_j1 == 0 and etatPions[noPion-1]==1 and joueur == 1){
+                etatPions[noPion-1] = 2 ;
+
+                for(int k = 0; k<etatPions.size(); k++){
+                      std::cout << etatPions[k];
+                      std::cout << std::endl;
+                    }
+                      reste_pion_j1= reste_pion_j1-1;
+                      std::cout << "reste_pion_j1" << '\n';
+                      std::cout << reste_pion_j1 << '\n';
+                    plateau1 = make_tuple(plateau, etatPions, reste_pion_j1, reste_pion_j2);
+
+
+              }
+              else{
+                plateau1 = make_tuple(plateau, etatPions, reste_pion_j1, reste_pion_j2);
+
+              }
 
 }
 
@@ -211,6 +243,9 @@
 					plateau[posy+ptnMouvement][posx] = 2;
           arrivee_j2 = posy+ptnMouvement;
 				}
+        if(6 <= posy and etatPions[noPion+4] == 1){
+          arrivee_j2 = 6;
+        }
 			}
 			else{
 
@@ -346,42 +381,42 @@
 
 
 				plateau[posy][posx] = 0;
+        PionsPris.clear();
+        PionsPris.resize(0);
+        std::cout << "arrivee_j2" << '\n';
+        std::cout << arrivee_j2 << '\n';
+
+        if(arrivee_j2 == 6 and etatPions[noPion+4]==1 and joueur == 2){
+
+
+
+          etatPions[noPion+4] = 2 ;
+          for(int k = 0; k<etatPions.size(); k++){
+                std::cout << etatPions[k];
+                std::cout << std::endl;
+              }
+
+              reste_pion_j2= reste_pion_j2-1;
+              std::cout << "reste_pion_j2" << '\n';
+              std::cout << reste_pion_j2 << '\n';
+        plateau1 = make_tuple(plateau, etatPions, reste_pion_j1, reste_pion_j2);
+
+        }
+        else{
+          plateau1 = make_tuple(plateau, etatPions, reste_pion_j1, reste_pion_j2);
+        }
+
+
 
 
 				}
 
-        PionsPris.clear();
-        PionsPris.resize(0);
-
-std::tuple<std::vector<std::vector<int>>,std::vector<int>, int, int> plateau1 (plateau, etatPions, reste_pion_j1, reste_pion_j2);
-  std::cout << "do" << '\n';
-  std::cout << arrivee_j1 << '\n';
-  std::cout << etatPions[noPion-1] << '\n';
-  std::cout << noPion-1 << '\n';
-  std::cout << joueur << '\n';
-
-        if(arrivee_j1 == 0 and etatPions[noPion-1]==1 and joueur == 1){
-          etatPions[noPion-1] = 2 ;
-          for(int k = 0; k<etatPions.size(); k++){
-                std::cout << etatPions[k];
-                std::cout << std::endl;
-              }
-              plateau1 = make_tuple(plateau, etatPions, reste_pion_j1, reste_pion_j2);
-          std::cout << etatPions[noPion-1] << '\n';
-          reste_pion_j1= reste_pion_j1-1;
-        }
 
 
-        if(arrivee_j2 == 6 and etatPions[noPion-1]==1 and joueur == 2){
 
-          etatPions[noPion-1] = 2 ;
-          for(int k = 0; k<etatPions.size(); k++){
-                std::cout << etatPions[k];
-                std::cout << std::endl;
-              }
-        plateau1 = make_tuple(plateau, etatPions, reste_pion_j1, reste_pion_j2);
-          reste_pion_j2= reste_pion_j2-1;
-        }
+
+
+
 
 
 		return plateau1;
