@@ -12,8 +12,8 @@
    std::vector<int> PionsPris;
    PionsPris = std::vector<int>(0);
    std::vector<int> pos = posPions(plateau);
-   int reste_pion_j1 = 5;
-   int reste_pion_j2 = 5;
+   int reste_pion_j1 = 0;
+   int reste_pion_j2 = 0;
    int arrivee_j1 = 100;
    int arrivee_j2 = 600;
    std::tuple<std::vector<std::vector<int>>,std::vector<int>, int, int> plateau1 (plateau, etatPions, reste_pion_j1, reste_pion_j2);
@@ -47,6 +47,10 @@
 
 				//Si il est au bout
 				if(6 <= posx + ptnMouvement){
+          std::cout << "çpiouj" << '\n';
+          std::cout <<  posx << '\n';
+          std::cout << ptnMouvement << '\n';
+
 
 					plateau[posy][6] = 1;
 
@@ -59,9 +63,12 @@
 					plateau[posy][posx+ptnMouvement] = 1;
           arrivee_j1 = posx+ptnMouvement;
 				}
-        if(0 >= posx and etatPions[noPion-1] == 1){
+        if(0 > arrivee_j1 and etatPions[noPion-1] == 1 ){
 
 
+          std::cout << "çpiouj" << '\n';
+          std::cout <<  posx << '\n';
+          std::cout << ptnMouvement << '\n';
 
           arrivee_j1 = 0;
         }
@@ -85,6 +92,7 @@
 						if(etatPions[noPion - 1]== 0){//pion j1 dans la phase aller
 
 							plateau[posy][posx + compteur] = 1;
+              arrivee_j1 = posx+compteur;
               for(int k=0 ; k<PionsPris.size(); k++){
 
 
@@ -96,11 +104,11 @@
                     plateau[posy][posx+1] = 0;
                     plateau[0][posx+1] = 2;
                   }
-                  else{
+                  else{// si le pion du j2 est sur le retour
 
-                    plateau[posy][posx+PionsPris[k]] = 0;
-                    plateau[0][posx+PionsPris[k]] = 2;
-                  }  // si le pion du j2 est sur le retour
+                    plateau[posy][posx+PionsPris[k]+1] = 0;
+                    plateau[0][posx+PionsPris[k]+1] = 2;
+                  }
                    //on déplace le pion du joueur2
 
 
@@ -131,6 +139,9 @@
 						}
 						else{ //si le pion du j2 est sur le retour
 							plateau[posy][posx - compteur] = 1;
+              std::cout << "poi" << '\n';
+              std::cout << posx - compteur << '\n';
+              arrivee_j1 = posx -compteur;
 
               for(int k=0 ; k<PionsPris.size(); k++){//distance entre notre pion et celui qui est pàris
                 if(etatPions[3 + posx+PionsPris[k]]== 1){//si le pion du j2 est sur le retour
@@ -184,8 +195,7 @@
 				}
 			}
 			plateau[posy][posx]=0;
-      PionsPris.clear();
-      PionsPris.resize(0);
+
       std::cout << "arrivee_j1" << '\n';
       std::cout << arrivee_j1 << '\n';
 
@@ -198,7 +208,7 @@
                       std::cout << etatPions[k];
                       std::cout << std::endl;
                     }
-                      reste_pion_j1= reste_pion_j1-1;
+                      reste_pion_j1= 1;
                       std::cout << "reste_pion_j1" << '\n';
                       std::cout << reste_pion_j1 << '\n';
                     plateau1 = make_tuple(plateau, etatPions, reste_pion_j1, reste_pion_j2);
@@ -212,6 +222,8 @@
 
 }
 
+PionsPris.clear();
+PionsPris.resize(0);
 
 
 
@@ -312,6 +324,7 @@
 
                   }
                   plateau[posy - compteur][posx] = 2;
+                  arrivee_j2 = posy-compteur;
                 }
                 if (posy-compteur == 0){
                   etatPions[4 + noPion] = 1;
@@ -322,6 +335,7 @@
 							}
 							else{// j2 phase retour
 								plateau[posy + compteur][posx] = 2;
+                arrivee_j2 = posy+compteur;
                 for(int k=0 ; k<PionsPris.size(); k++){
 
 
@@ -381,8 +395,7 @@
 
 
 				plateau[posy][posx] = 0;
-        PionsPris.clear();
-        PionsPris.resize(0);
+
         std::cout << "arrivee_j2" << '\n';
         std::cout << arrivee_j2 << '\n';
 
@@ -396,7 +409,7 @@
                 std::cout << std::endl;
               }
 
-              reste_pion_j2= reste_pion_j2-1;
+              reste_pion_j2= 1;
               std::cout << "reste_pion_j2" << '\n';
               std::cout << reste_pion_j2 << '\n';
         plateau1 = make_tuple(plateau, etatPions, reste_pion_j1, reste_pion_j2);
@@ -413,7 +426,8 @@
 
 
 
-
+        PionsPris.clear();
+        PionsPris.resize(0);
 
 
 

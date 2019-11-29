@@ -46,6 +46,8 @@ int jeu(std::vector<std::vector<int>> plateau, std::vector<int> etatPions){
 
 		int tour_joueur = 1;
 		int choix_pion = 0;
+    int score_j1 = 5;
+    int score_j2 = 5;
     std::vector<std::vector<std::string>> aff_plateau;
     aff_plateau = std::vector<std::vector<std::string>> (7);
     for ( int i = 0; i < 7; i++ ){
@@ -71,7 +73,7 @@ int jeu(std::vector<std::vector<int>> plateau, std::vector<int> etatPions){
     plateau1 = make_tuple(plateau, etatPions, 5, 5);
 
 		affichePlateauV3(plateau, aff_plateau, etatPions, 1);
-		while(std::get<2>(plateau1) > 0 or std::get<3>(plateau1) > 0){
+		while(score_j1 > 1 and score_j2 > 1 ){
 			 std::cout << "Entrez un coup" << std::endl;
        std::cin >> choix_pion;
 
@@ -85,6 +87,9 @@ int jeu(std::vector<std::vector<int>> plateau, std::vector<int> etatPions){
 				plateau1 = deplace(plateau, etatPions, 1, choix_pion );
 				plateau = std::get<0>(plateau1);
 				etatPions = std::get<1>(plateau1);
+        score_j1 = score_j1 - std::get<2>(plateau1);
+        std::cout << "score_j1" << '\n';
+        std::cout << score_j1 << '\n';
 				affichePlateauV3(plateau, aff_plateau, etatPions, choix_pion);
 				tour_joueur++;
 			}
@@ -98,16 +103,19 @@ int jeu(std::vector<std::vector<int>> plateau, std::vector<int> etatPions){
 				plateau1 = deplace(plateau, etatPions, 2, choix_pion);
 				plateau = std::get<0>(plateau1);
 				etatPions = std::get<1>(plateau1);
+        score_j2 = score_j2 - std::get<3>(plateau1);
+        std::cout << "score_j2" << '\n';
+        std::cout << score_j2 << '\n';
 				affichePlateauV3(plateau, aff_plateau, etatPions, choix_pion);
 				tour_joueur++;
 			}
 
 
 		}
-    if(std::get<2>(plateau1) == 0){
+    if(score_j1 == 1){
       std::cout <<" Joueur 1 a gagné" << std::endl;
     }
-    else if(std::get<3>(plateau1) == 0){
+    else if(score_j2 == 1){
       std::cout <<" Joueur 2 a gagné" << std::endl;
     }
     return 0;
