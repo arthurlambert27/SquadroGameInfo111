@@ -14,6 +14,10 @@
    std::vector<int> pos = posPions(plateau);
    int reste_pion_j1 = 5;
    int reste_pion_j2 = 5;
+   int arrivee_j1 = 0;
+   int arrivee_j2 = 6;
+
+
 	 std::vector<int> pionDevantZoneMouvement = pionsDevantZoneMouvement(plateau, etatPions, joueur, noPion);
 		if(joueur == 1){
 
@@ -31,6 +35,12 @@
 
 
 
+
+
+
+
+
+
 			//Si il y a pas de pion dans la zone de mouvement devant moi
 			if(tabIsNul(pionDevantZoneMouvement)){
 
@@ -39,10 +49,12 @@
 
 					plateau[posy][6] = 1;
 					etatPions[noPion - 1 ] = 1;
+          arrivee_j1 = 6;
 
 				}
 				else{
 					plateau[posy][posx+ptnMouvement] = 1;
+          arrivee_j1 = posx+ptnMouvement;
 				}
 			}
 
@@ -52,8 +64,12 @@
 				int compteur = 0;
 				int sauteSurAdversaire = 0;
 
+
 				for(int i = 0; i<pionsDev.size(); i ++){
-          
+          if(pionsDev[i] == 1 and sauteSurAdversaire <= 1){
+            PionsPris.push_back(i);
+
+          }
 					if(pionsDev[i] == 0 and sauteSurAdversaire == 1){
 						i = 8;
 						compteur = compteur + 1;
@@ -100,7 +116,7 @@
               if (posx+compteur == 6){ //si le pion va arriver au bord du plateau
                 etatPions[noPion - 1] = 1;// on change son état
               }
-              reste_pion_j1= reste_pion_j1-1; //condition de victoire à changer
+
 
 
 						}
@@ -140,7 +156,7 @@
                    //on place le pions pris au j2 en bas
                 }
               }
-              reste_pion_j1= reste_pion_j1-1;
+
 
 						}
 
@@ -179,6 +195,8 @@
 				}
 			}
 
+
+
 			if(tabIsNul(pionDevantZoneMouvement)){
 
 				plateau[posy][posx] = 0;
@@ -186,10 +204,12 @@
 
 					plateau[0][posx] = 2;
 					etatPions[4 + noPion] = 1;
+          arrivee_j2 = 0;
 				}
 				else{
 
 					plateau[posy+ptnMouvement][posx] = 2;
+          arrivee_j2 = posy+ptnMouvement;
 				}
 			}
 			else{
@@ -207,7 +227,7 @@
               std::cout << pionsDev[i] << '\n';
 
               }
-            std::cout << "addazd" << '\n';
+
             for(int i = 0; i<PionsPris.size(); i ++){
               std::cout << PionsPris[i] << '\n';
 
@@ -222,12 +242,7 @@
 
 
                 for(int k=0 ; k<PionsPris.size(); k++){
-                  std::cout << "ahha" << '\n';
-                  std::cout << k << '\n';
-                  std::cout << posy-PionsPris[k]-2 << '\n';
-                  std::cout << etatPions[posy-PionsPris[k]-2] << '\n';
-                  std::cout << posy-PionsPris[k] << '\n';
-                  std::cout << PionsPris[k] << '\n';
+
                   if(etatPions[posy-PionsPris[k]-2]== 1){// si j1 phase retour
 
                     if(PionsPris[k]==0){
@@ -267,7 +282,7 @@
                   etatPions[4 + noPion] = 1;
                 }
 
-                reste_pion_j2= reste_pion_j2-1;
+
 
 							}
 							else{// j2 phase retour
@@ -311,7 +326,7 @@
               }
 
 
-                reste_pion_j2= reste_pion_j2-1;
+
 
 						}
           }
@@ -338,9 +353,36 @@
         PionsPris.clear();
         PionsPris.resize(0);
 
+std::tuple<std::vector<std::vector<int>>,std::vector<int>, int, int> plateau1 (plateau, etatPions, reste_pion_j1, reste_pion_j2);
+  std::cout << "do" << '\n';
+  std::cout << arrivee_j1 << '\n';
+  std::cout << etatPions[noPion-1] << '\n';
+  std::cout << noPion-1 << '\n';
+  std::cout << joueur << '\n';
+
+        if(arrivee_j1 == 0 and etatPions[noPion-1]==1 and joueur == 1){
+          etatPions[noPion-1] = 2 ;
+          for(int k = 0; k<etatPions.size(); k++){
+                std::cout << etatPions[k];
+                std::cout << std::endl;
+              }
+              plateau1 = make_tuple(plateau, etatPions, reste_pion_j1, reste_pion_j2);
+          std::cout << etatPions[noPion-1] << '\n';
+          reste_pion_j1= reste_pion_j1-1;
+        }
 
 
-			std::tuple<std::vector<std::vector<int>>,std::vector<int>, int, int> plateau1 (plateau, etatPions, reste_pion_j1, reste_pion_j2);
+        if(arrivee_j2 == 6 and etatPions[noPion-1]==1 and joueur == 2){
+
+          etatPions[noPion-1] = 2 ;
+          for(int k = 0; k<etatPions.size(); k++){
+                std::cout << etatPions[k];
+                std::cout << std::endl;
+              }
+        plateau1 = make_tuple(plateau, etatPions, reste_pion_j1, reste_pion_j2);
+          reste_pion_j2= reste_pion_j2-1;
+        }
+
 
 		return plateau1;
 	 }

@@ -69,12 +69,19 @@ int jeu(std::vector<std::vector<int>> plateau, std::vector<int> etatPions){
 		std::tuple<std::vector<std::vector<int>>, std::vector<int>, int, int> plateau1;
 
     plateau1 = make_tuple(plateau, etatPions, 5, 5);
-        
+
 		affichePlateauV3(plateau, aff_plateau, etatPions, 1);
 		while(std::get<2>(plateau1) > 0 or std::get<3>(plateau1) > 0){
 			 std::cout << "Entrez un coup" << std::endl;
-			std::cin >> choix_pion;
-			if(tour_joueur%2 == 1){ //si c'est le tour du j1 on effectue le deplacment
+       std::cin >> choix_pion;
+
+			if(tour_joueur%2 == 1){
+        while(etatPions[choix_pion-1] > 1 or choix_pion > 5  ){
+          std::cout << "coup non valide" << '\n';
+          std::cin >> choix_pion;
+
+        }
+ //si c'est le tour du j1 on effectue le deplacment
 				plateau1 = deplace(plateau, etatPions, 1, choix_pion );
 				plateau = std::get<0>(plateau1);
 				etatPions = std::get<1>(plateau1);
@@ -82,6 +89,11 @@ int jeu(std::vector<std::vector<int>> plateau, std::vector<int> etatPions){
 				tour_joueur++;
 			}
 			else { //sinon j2
+        while(etatPions[choix_pion+4] > 1 or choix_pion > 5  ){
+          std::cout << "coup non valide" << '\n';
+          std::cin >> choix_pion;
+
+        }
 
 				plateau1 = deplace(plateau, etatPions, 2, choix_pion);
 				plateau = std::get<0>(plateau1);
