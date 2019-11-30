@@ -1,6 +1,7 @@
 #include "graphique.h"
 
-void gui(){
+void gui(int choix){
+  int meilleurCoup = 0;
   int tour = 0;
   sf::Vector2i positionSouris;
     int t = 0;
@@ -300,7 +301,7 @@ music.play();
       positionSouris = sf::Mouse::getPosition(window);
 
         {
-          if(tour%2 == 0){
+          if(tour%2 == 0 and choix == 0){
             if(positionSouris.y < ((height*2)/7)  ){
               plateau1 = deplace(plateau, etatPions, 1,1 );
       				plateau = std::get<0>(plateau1);
@@ -331,6 +332,14 @@ music.play();
       				etatPions = std::get<1>(plateau1);
               tour = tour + 1;
             }
+          }
+
+          else if(tour%2 == 0 and choix == 1){
+            meilleurCoup =  meilleurCoup2(arbre2(plateau,etatPions));
+            plateau1 = deplace(plateau, etatPions, 1, meilleurCoup);
+            plateau = std::get<0>(plateau1);
+            etatPions = std::get<1>(plateau1);
+            tour = tour + 1;
           }
           else if (tour % 2 == 1){
 

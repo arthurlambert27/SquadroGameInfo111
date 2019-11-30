@@ -27,10 +27,11 @@ int main(){
     std::cout << "Menu:\n";
     std::cout << "1. GUI\n";
     std::cout << "2. Console\n";
+    std::cout << "3. GUI contre IA\n";
     std::cin >> choix;
 
     if(choix == 1){
-      gui();
+      gui(0);
     }
     else if(choix == 2){
     std::vector<std::vector<int>> plateau = creationPlateauInitial();
@@ -40,6 +41,9 @@ int main(){
 			etatPions[i] = 0;
 		}
 	jeu(plateau, etatPions);
+    }
+    if(choix ==3){
+      gui(1);
     }
     return 0;
 }

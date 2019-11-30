@@ -21,7 +21,7 @@ void affichePlateau(std::vector<std::vector<int>> plateau){
 * @param etatPions tableau qui contient l'etat des pions
 */
 
-void affichePlateauV3(std::vector<std::vector<int>> plateau,std::vector<std::vector<std::string>> aff_plateau, std::vector<int> etatPions, int choix_pion){
+void affichePlateauV3(std::vector<std::vector<int>> plateau,std::vector<std::vector<std::string>> aff_plateau, std::vector<int> etatPions){
   std::vector<int> position = posPions(plateau);
   int PionX =0;
   int PionY = 0;
@@ -57,6 +57,8 @@ void affichePlateauV3(std::vector<std::vector<int>> plateau,std::vector<std::vec
                 }
                 std::cout << std::endl;
             }
+
+
           std::cout << fnErreur(plateau, etatPions) << "\n";
 
 /**
