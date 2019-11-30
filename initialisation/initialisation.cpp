@@ -69,8 +69,8 @@ int jeu(std::vector<std::vector<int>> plateau, std::vector<int> etatPions){
 		std::tuple<std::vector<std::vector<int>>, std::vector<int>, int, int> plateau1;
 
     plateau1 = make_tuple(plateau, etatPions, 5, 5);
-        
-		affichePlateauV3(plateau, aff_plateau, etatPions, 1);
+
+		affichePlateauV3(plateau, aff_plateau, etatPions);
 		while(std::get<2>(plateau1) > 0 or std::get<3>(plateau1) > 0){
 			 std::cout << "Entrez un coup" << std::endl;
 			std::cin >> choix_pion;
@@ -78,7 +78,7 @@ int jeu(std::vector<std::vector<int>> plateau, std::vector<int> etatPions){
 				plateau1 = deplace(plateau, etatPions, 1, choix_pion );
 				plateau = std::get<0>(plateau1);
 				etatPions = std::get<1>(plateau1);
-				affichePlateauV3(plateau, aff_plateau, etatPions, choix_pion);
+				affichePlateauV3(plateau, aff_plateau, etatPions);
 				tour_joueur++;
 			}
 			else { //sinon j2
@@ -86,7 +86,7 @@ int jeu(std::vector<std::vector<int>> plateau, std::vector<int> etatPions){
 				plateau1 = deplace(plateau, etatPions, 2, choix_pion);
 				plateau = std::get<0>(plateau1);
 				etatPions = std::get<1>(plateau1);
-				affichePlateauV3(plateau, aff_plateau, etatPions, choix_pion);
+				affichePlateauV3(plateau, aff_plateau, etatPions);
 				tour_joueur++;
 			}
 
@@ -100,3 +100,70 @@ int jeu(std::vector<std::vector<int>> plateau, std::vector<int> etatPions){
     }
     return 0;
   }
+
+
+
+  /*
+  * Demande une action aux joueurs
+  * @param plateau Plateau du jeu
+  * @param etatPions tableau qui contient l'etat des pions
+  */
+  int jeuContre(std::vector<std::vector<int>> plateau, std::vector<int> etatPions){
+
+
+  		int tour_joueur = 1;
+  		int choix_pion = 0;
+      std::vector<std::vector<std::string>> aff_plateau;
+      aff_plateau = std::vector<std::vector<std::string>> (7);
+      for ( int i = 0; i < 7; i++ ){
+      aff_plateau[i] = std::vector<std::string>(7);
+    }
+      for(int i = 0; i< 7;i++){
+          for(int j=0; j<7; j++){
+            if (plateau[i][j]==1){
+              aff_plateau[i][j] = ">";
+            }
+            else if (plateau[i][j]==2){
+              aff_plateau[i][j] = "A";
+            }
+            else{
+              aff_plateau[i][j] = ".";
+            }
+          std::cout << std::endl;
+      }
+      }
+
+  		std::tuple<std::vector<std::vector<int>>, std::vector<int>, int, int> plateau1;
+
+      plateau1 = make_tuple(plateau, etatPions, 5, 5);
+
+  		affichePlateauV3(plateau, aff_plateau, etatPions);
+  		while(std::get<2>(plateau1) > 0 or std::get<3>(plateau1) > 0){
+  			 std::cout << "Entrez un coup" << std::endl;
+  			std::cin >> choix_pion;
+  			if(tour_joueur%2 == 1){ //si c'est le tour du j1 on effectue le deplacment
+  				plateau1 = deplace(plateau, etatPions, 1, choix_pion );
+  				plateau = std::get<0>(plateau1);
+  				etatPions = std::get<1>(plateau1);
+  				affichePlateauV3(plateau, aff_plateau, etatPions);
+  				tour_joueur++;
+  			}
+  			else { //sinon j2
+
+  				plateau1 = deplace(plateau, etatPions, 2, choix_pion);
+  				plateau = std::get<0>(plateau1);
+  				etatPions = std::get<1>(plateau1);
+  				affichePlateauV3(plateau, aff_plateau, etatPions);
+  				tour_joueur++;
+  			}
+
+
+  		}
+      if(std::get<2>(plateau1) == 0){
+        std::cout <<" Joueur 1 a gagné" << std::endl;
+      }
+      else if(std::get<3>(plateau1) == 0){
+        std::cout <<" Joueur 2 a gagné" << std::endl;
+      }
+      return 0;
+    }

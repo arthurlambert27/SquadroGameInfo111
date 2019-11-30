@@ -11,6 +11,7 @@
 #include "../mouvement/mouvement.h"
 #include "../deplacement/deplacement.h"
 #include "../initialisation/initialisation.h"
+#include "../ia/ia.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <stdlib.h>
@@ -19,7 +20,7 @@
 
 
 
-void gui();
+void gui(int choix);
 void menu(sf::RenderWindow &window);
 void pastilleCouleurJoueur(sf::RenderWindow &window, int tour);
 
