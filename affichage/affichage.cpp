@@ -43,6 +43,14 @@ void affichePlateauV3(std::vector<std::vector<int>> plateau,std::vector<std::vec
         else if (plateau[i][j]!=2 or plateau[i][j]!=1){
           aff_plateau[i][j] = ".";
         }
+        else if (plateau[i][j]==1 and etatPions[i-1]==0){
+          aff_plateau[i][j] = "O";
+        }
+        else if (plateau[i][j]==2 and etatPions[j+4]==2){
+          aff_plateau[i][j] = "O";
+
+        }
+
       std::cout << std::endl;
   }
   }

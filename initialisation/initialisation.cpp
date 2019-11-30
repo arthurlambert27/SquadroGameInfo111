@@ -46,6 +46,8 @@ int jeu(std::vector<std::vector<int>> plateau, std::vector<int> etatPions){
 
 		int tour_joueur = 1;
 		int choix_pion = 0;
+    int score_j1 = 5;
+    int score_j2 = 5;
     std::vector<std::vector<std::string>> aff_plateau;
     aff_plateau = std::vector<std::vector<std::string>> (7);
     for ( int i = 0; i < 7; i++ ){
@@ -70,32 +72,63 @@ int jeu(std::vector<std::vector<int>> plateau, std::vector<int> etatPions){
 
     plateau1 = make_tuple(plateau, etatPions, 5, 5);
 
+<<<<<<< HEAD
 		affichePlateauV3(plateau, aff_plateau, etatPions);
 		while(std::get<2>(plateau1) > 0 or std::get<3>(plateau1) > 0){
+=======
+		affichePlateauV3(plateau, aff_plateau, etatPions, 1);
+		while(score_j1 > 1 and score_j2 > 1 ){
+>>>>>>> 33d4d6b1ec5b1e6ae2e7324e97432b4ede074ed6
 			 std::cout << "Entrez un coup" << std::endl;
-			std::cin >> choix_pion;
-			if(tour_joueur%2 == 1){ //si c'est le tour du j1 on effectue le deplacment
+       std::cin >> choix_pion;
+
+			if(tour_joueur%2 == 1){
+        while(etatPions[choix_pion-1] > 1 or choix_pion > 5  ){
+          std::cout << "coup non valide" << '\n';
+          std::cin >> choix_pion;
+
+        }
+ //si c'est le tour du j1 on effectue le deplacment
 				plateau1 = deplace(plateau, etatPions, 1, choix_pion );
 				plateau = std::get<0>(plateau1);
 				etatPions = std::get<1>(plateau1);
+<<<<<<< HEAD
 				affichePlateauV3(plateau, aff_plateau, etatPions);
+=======
+        score_j1 = score_j1 - std::get<2>(plateau1);
+        std::cout << "score_j1" << '\n';
+        std::cout << score_j1 << '\n';
+				affichePlateauV3(plateau, aff_plateau, etatPions, choix_pion);
+>>>>>>> 33d4d6b1ec5b1e6ae2e7324e97432b4ede074ed6
 				tour_joueur++;
 			}
 			else { //sinon j2
+        while(etatPions[choix_pion+4] > 1 or choix_pion > 5  ){
+          std::cout << "coup non valide" << '\n';
+          std::cin >> choix_pion;
+
+        }
 
 				plateau1 = deplace(plateau, etatPions, 2, choix_pion);
 				plateau = std::get<0>(plateau1);
 				etatPions = std::get<1>(plateau1);
+<<<<<<< HEAD
 				affichePlateauV3(plateau, aff_plateau, etatPions);
+=======
+        score_j2 = score_j2 - std::get<3>(plateau1);
+        std::cout << "score_j2" << '\n';
+        std::cout << score_j2 << '\n';
+				affichePlateauV3(plateau, aff_plateau, etatPions, choix_pion);
+>>>>>>> 33d4d6b1ec5b1e6ae2e7324e97432b4ede074ed6
 				tour_joueur++;
 			}
 
 
 		}
-    if(std::get<2>(plateau1) == 0){
+    if(score_j1 == 1){
       std::cout <<" Joueur 1 a gagné" << std::endl;
     }
-    else if(std::get<3>(plateau1) == 0){
+    else if(score_j2 == 1){
       std::cout <<" Joueur 2 a gagné" << std::endl;
     }
     return 0;
