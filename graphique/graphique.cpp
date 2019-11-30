@@ -3,6 +3,8 @@
 void gui(int choix){
   int meilleurCoup = 0;
   int tour = 0;
+  int score_j1 = 5;
+  int score_j2 = 5;
   sf::Vector2i positionSouris;
     int t = 0;
     std::vector<std::vector<int>> plateau = creationPlateauInitial();
@@ -58,7 +60,7 @@ music.play();
                  //std::cout << "Erreur lors de l'ouverture de la texture";
                }
    // Start the game loop
-  while (window.isOpen())
+  while (window.isOpen() and score_j1 >1 and score_j2>1)
   {
       // Process events
       sf::Event event;
@@ -302,34 +304,40 @@ music.play();
 
         {
           if(tour%2 == 0 and choix == 0){
-            if(positionSouris.y < ((height*2)/7)  ){
+            if(positionSouris.y < ((height*2)/7) and etatPions[0] < 2){
               plateau1 = deplace(plateau, etatPions, 1,1 );
       				plateau = std::get<0>(plateau1);
       				etatPions = std::get<1>(plateau1);
+              score_j1 = score_j1 - std::get<2>(plateau1);
               tour = tour + 1;
             }
-            else if(positionSouris.y < ((height*3)/7)){
+            else if(positionSouris.y < ((height*3)/7) and etatPions[1] < 2 ){
               plateau1 = deplace(plateau, etatPions, 1,2 );
       				plateau = std::get<0>(plateau1);
       				etatPions = std::get<1>(plateau1);
+              score_j1 = score_j1 - std::get<2>(plateau1);
+
               tour = tour + 1;
             }
-            else if (positionSouris.y < ((height*4)/7)){
+            else if (positionSouris.y < ((height*4)/7) and etatPions[2] < 2 ){
               plateau1 = deplace(plateau, etatPions, 1,3 );
       				plateau = std::get<0>(plateau1);
       				etatPions = std::get<1>(plateau1);
+              score_j1 = score_j1 - std::get<2>(plateau1);
               tour = tour + 1;
             }
-            else if (positionSouris.y < ((height*5)/7)){
+            else if (positionSouris.y < ((height*5)/7) and etatPions[1] < 3 ){
               plateau1 = deplace(plateau, etatPions, 1,4 );
       				plateau = std::get<0>(plateau1);
       				etatPions = std::get<1>(plateau1);
+              score_j1 = score_j1 - std::get<2>(plateau1);
               tour = tour + 1;
             }
-            else if (positionSouris.y < ((height*6)/7)){
+            else if (positionSouris.y < ((height*6)/7) and etatPions[4] < 2){
               plateau1 = deplace(plateau, etatPions, 1,5 );
       				plateau = std::get<0>(plateau1);
       				etatPions = std::get<1>(plateau1);
+              score_j1 = score_j1 - std::get<2>(plateau1);
               tour = tour + 1;
             }
           }
@@ -339,41 +347,53 @@ music.play();
             plateau1 = deplace(plateau, etatPions, 1, meilleurCoup);
             plateau = std::get<0>(plateau1);
             etatPions = std::get<1>(plateau1);
+            score_j1 = score_j1 - std::get<2>(plateau1);
             tour = tour + 1;
           }
           else if (tour % 2 == 1){
 
 
-            if(positionSouris.x < ((width*2)/7)  ){
+            if(positionSouris.x < ((width*2)/7) and etatPions[5] < 2 ){
               plateau1 = deplace(plateau, etatPions, 2,1 );
       				plateau = std::get<0>(plateau1);
       				etatPions = std::get<1>(plateau1);
+              score_j2 = score_j2 - std::get<3>(plateau1);
               tour = tour + 1;
             }
-            else if(positionSouris.x < ((width*3)/7)){
+            else if(positionSouris.x < ((width*3)/7) and etatPions[6] < 2){
               plateau1 = deplace(plateau, etatPions, 2,2 );
       				plateau = std::get<0>(plateau1);
       				etatPions = std::get<1>(plateau1);
+              score_j2 = score_j2 - std::get<3>(plateau1);
               tour = tour + 1;
             }
-            else if (positionSouris.x < ((width*4)/7)){
+            else if (positionSouris.x < ((width*4)/7) and etatPions[7] < 2){
               plateau1 = deplace(plateau, etatPions, 2,3 );
       				plateau = std::get<0>(plateau1);
       				etatPions = std::get<1>(plateau1);
+              score_j2 = score_j2 - std::get<3>(plateau1);
               tour = tour + 1;
             }
-            else if (positionSouris.x < ((width*5)/7)){
+            else if (positionSouris.x < ((width*5)/7) and etatPions[8] < 2){
               plateau1 = deplace(plateau, etatPions, 2,4 );
       				plateau = std::get<0>(plateau1);
       				etatPions = std::get<1>(plateau1);
+              score_j2 = score_j2 - std::get<3>(plateau1);
               tour = tour + 1;
             }
-            else if (positionSouris.x < ((width*6)/7)){
+            else if (positionSouris.x < ((width*6)/7) and etatPions[9] < 2){
               plateau1 = deplace(plateau, etatPions, 2,5 );
       				plateau = std::get<0>(plateau1);
       				etatPions = std::get<1>(plateau1);
+              score_j2 = score_j2 - std::get<3>(plateau1);
               tour = tour + 1;
             }
+            for(int i = 0; i< 7;i++){
+                      for(int j=0; j<7; j++){
+                          std::cout << plateau[i][j];
+                      }
+                      std::cout << std::endl;
+                  }
 
 
 
@@ -398,7 +418,7 @@ music.play();
       window.draw(pion8);
       window.draw(pion9);
       window.draw(pion10);
-      pastilleCouleurJoueur(window, tour);
+      pastilleCouleurJoueur(window, tour, score_j1, score_j2);
       window.display();
 
 
@@ -447,7 +467,7 @@ decision = 1;
 }
 
 
-void pastilleCouleurJoueur(sf::RenderWindow &window, int tour){
+void pastilleCouleurJoueur(sf::RenderWindow &window, int tour, int score_j1, int score_j2){
   sf::Font font;
 if (!font.loadFromFile("font.ttf"))
 {
@@ -458,11 +478,18 @@ if (!font.loadFromFile("font.ttf"))
   text.setCharacterSize(15);
   text.setFillColor(sf::Color::Red);
   text.setStyle(sf::Text::Bold | sf::Text::Underlined);
-  if(tour%2 == 0){
+  if(tour%2 == 0 and score_j1 > 1){
     text.setString("Joueur 1");
   }
-  else if(tour%2 == 1){
+  else if(tour%2 == 1 and score_j2 > 1){
     text.setString("Joueur 2");
+
+  }
+  else if(score_j1 == 1){
+    text.setString("Joueur 1 a gagné");
+  }
+  else if(score_j2 == 1){
+    text.setString("Joueur 2 a gagné");
   }
   text.setPosition(sf::Vector2f(  0   , 10   ));
   window.draw(text);

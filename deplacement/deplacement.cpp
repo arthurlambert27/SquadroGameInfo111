@@ -339,7 +339,8 @@ PionsPris.resize(0);
                 for(int k=0 ; k<PionsPris.size(); k++){
 
 
-                  if(etatPions[posy+PionsPris[k]+1] == 1){// si j1 phase retour
+                  if(etatPions[posy+PionsPris[k]] == 1){
+                    std::cout << "^pol" << '\n';// si j1 phase retour
 
                     if(PionsPris[k]==0){
                       plateau[posy+1][posx] = 0;
@@ -356,7 +357,9 @@ PionsPris.resize(0);
 
 
                   }
-                  else if (etatPions[posy+PionsPris[k]+1]== 0){//pion j1 phase aller
+                  else if (etatPions[posy+PionsPris[k]]== 0) {
+                    std::cout << "fpok" << '\n';//pion j1 phase aller
+                    std::cout << posy+PionsPris[k]+1 << '\n';
 
                     if(PionsPris[k]==0){
                       plateau[posy+1][posx] = 0;
