@@ -22,7 +22,7 @@
 
 void gui(int choix);
 void menu(sf::RenderWindow &window);
-void pastilleCouleurJoueur(sf::RenderWindow &window, int tour);
+void pastilleCouleurJoueur(sf::RenderWindow &window, int tour, int score_j1, int score_j2);
 
 
 
