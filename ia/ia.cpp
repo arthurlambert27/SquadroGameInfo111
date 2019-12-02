@@ -67,9 +67,14 @@ std::vector<std::vector<float>> arbre2(std::vector<std::vector<int>> plateauSave
     probabilite[i] = std::vector<float>(5);
   }
   for(int i = 0; i< 5; i++){
-    plateau1 = deplace(plateau, etatPions,1,i + 1);
+    if(etatPions[i] <2){
+      plateau1 = deplace(plateau, etatPions,1,i + 1);
+    }
+
     for(int j = 0; j<5; j++){
-      plateau2 = deplace(std::get<0>(plateau1), std::get<1>(plateau1), 2, j+1);
+      if(etatPions[j]<2){
+        plateau2 = deplace(std::get<0>(plateau1), std::get<1>(plateau1), 2, j+1);
+      }
 
       probabilite[i][j] = (fnErreur(std::get<0>(plateau2), std::get<1>(plateau2) ));
 

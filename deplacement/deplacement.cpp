@@ -47,9 +47,7 @@
 
 				//Si il est au bout
 				if(6 <= posx + ptnMouvement){
-          std::cout << "çpiouj" << '\n';
-          std::cout <<  posx << '\n';
-          std::cout << ptnMouvement << '\n';
+
 
 
 					plateau[posy][6] = 1;
@@ -66,9 +64,6 @@
         if(0 > arrivee_j1 and etatPions[noPion-1] == 1 ){
 
 
-          std::cout << "çpiouj" << '\n';
-          std::cout <<  posx << '\n';
-          std::cout << ptnMouvement << '\n';
 
           arrivee_j1 = 0;
         }
@@ -90,6 +85,7 @@
 						i = 8;
 						compteur = compteur + 1;
 						if(etatPions[noPion - 1]== 0){//pion j1 dans la phase aller
+              std::cout << "test 1" << '\n';
 
 							plateau[posy][posx + compteur] = 1;
               arrivee_j1 = posx+compteur;
@@ -99,12 +95,14 @@
 
                 std::cout << 5 + posx+PionsPris[k] << '\n';
                 if(etatPions[5 + posx+PionsPris[k]]== 1){ // si le pion du j2 est sur le retour
+                  std::cout << "test2" << '\n';
                   if(PionsPris[k]==0){
 
                     plateau[posy][posx+1] = 0;
                     plateau[0][posx+1] = 2;
                   }
                   else{// si le pion du j2 est sur le retour
+                    std::cout << "test3" << '\n';
 
                     plateau[posy][posx+PionsPris[k]+1] = 0;
                     plateau[0][posx+PionsPris[k]+1] = 2;
@@ -114,7 +112,7 @@
 
                 }
                 else if(etatPions[5 + posx+PionsPris[k]]== 0){// si j2 phase aller
-
+                  std::cout << "test4" << '\n';
                   if(PionsPris[k]==0){
 
                     plateau[posy][posx+1] = 0;
@@ -137,14 +135,18 @@
 
 
 						}
-						else{ //si le pion du j2 est sur le retour
+						else{ //si le pion du j1 est sur le retour
 							plateau[posy][posx - compteur] = 1;
               std::cout << "poi" << '\n';
               std::cout << posx - compteur << '\n';
               arrivee_j1 = posx -compteur;
 
+
               for(int k=0 ; k<PionsPris.size(); k++){//distance entre notre pion et celui qui est pàris
-                if(etatPions[3 + posx+PionsPris[k]]== 1){//si le pion du j2 est sur le retour
+                std::cout << "posx-PionsPris" << '\n';
+                std::cout << posx-PionsPris[k] << '\n';
+                if(etatPions[3 + posx-PionsPris[k]]== 1){//si le pion du j2 est sur le retour
+                  std::cout << "podfj" << '\n';
 
                   if(PionsPris[k]==0){
 
@@ -153,24 +155,24 @@
                   }
                   else{
 
-                    plateau[posy][posx-k] = 0;
-                    plateau[0][posx-k] = 2;
+                    plateau[posy][posx-PionsPris[k]-1] = 0;
+                    plateau[0][posx-PionsPris[k]-1] = 2;
                   }
                  //on place le pions pris au j2 en haut
 
 
 
                 }
-                else if(etatPions[4 + posx-PionsPris[k]]== 0){//si le pion du j2 est sur l'aller
-
+                else if(etatPions[3 + posx-PionsPris[k]]== 0){//si le pion du j2 est sur l'aller
+                std::cout << "test4" << '\n';
                   if(PionsPris[k]==0){
 
                     plateau[posy][posx-1] = 0;
                     plateau[6][posx-1] = 2;
                   }
                   else{
-
-                    plateau[posy][posx-PionsPris[k]] = 0;
+                    std::cout << "test5" << '\n';
+                    plateau[posy][posx-PionsPris[k]-1] = 0;
                     plateau[6][posx-PionsPris[k]-1] = 2;
                   }
                    //on place le pions pris au j2 en bas
@@ -184,7 +186,7 @@
 					else if(pionsDev[i] == 1 and sauteSurAdversaire == 0){
 						compteur = compteur + 1;
 						sauteSurAdversaire = 1;
-            PionsPris.push_back(i); //si il y a un pion devant, on l'ajoute à PionPris
+            PionsPris.push_back(i); //si il y a un pion devant, on l'ajoute à PionsPris
             for(int k=0 ; k<PionsPris.size(); k++){
               std::cout << PionsPris[k] << '\n';
           }
@@ -253,6 +255,7 @@ PionsPris.resize(0);
 				else{
 
 					plateau[posy+ptnMouvement][posx] = 2;
+          std::cout << "test6" << '\n';
           arrivee_j2 = posy+ptnMouvement;
 				}
         if(6 <= posy and etatPions[noPion+4] == 1){
@@ -287,17 +290,17 @@ PionsPris.resize(0);
 							compteur = compteur + 1;
 							if(etatPions[4 + noPion]== 0){// si pion j2 phase aller
 
-
+                std::cout << "test8" << '\n';
                 for(int k=0 ; k<PionsPris.size(); k++){
 
                   if(etatPions[posy-PionsPris[k]-2]== 1){// si j1 phase retour
-
+                    std::cout << "test9" << '\n';
                     if(PionsPris[k]==0){
                     plateau[posy-1][posx] = 0;
                     plateau[posy-1][6] = 1;
                   }
                   else{
-
+                    std::cout << "test10" << '\n';
                     plateau[posy-PionsPris[k]-1][posx] = 0;
                     plateau[posy-PionsPris[k]-1][6] = 1;
                   }
@@ -308,7 +311,7 @@ PionsPris.resize(0);
                   }
                   else if (etatPions[posy-PionsPris[k]-2]== 0){//pion j1 phase aller
 
-
+                    std::cout << "test11" << '\n';
 
 
                     if(PionsPris[k]==0){
@@ -317,7 +320,7 @@ PionsPris.resize(0);
                     plateau[posy-1][0] = 1;
                   }
                   else{
-
+                    std::cout << "test12" << '\n';
                     plateau[posy-PionsPris[k]-1][posx] = 0;
                     plateau[posy-PionsPris[k]-1][0] = 1;
                   }
@@ -334,19 +337,22 @@ PionsPris.resize(0);
 
 							}
 							else{// j2 phase retour
+
 								plateau[posy + compteur][posx] = 2;
                 arrivee_j2 = posy+compteur;
                 for(int k=0 ; k<PionsPris.size(); k++){
 
 
                   if(etatPions[posy+PionsPris[k]] == 1){
-                    std::cout << "^pol" << '\n';// si j1 phase retour
+
+                    std::cout << "test13" << '\n';// si j1 phase retour
 
                     if(PionsPris[k]==0){
                       plateau[posy+1][posx] = 0;
                       plateau[posy+1][6] = 1;
                     }
                     else{
+                      std::cout << "test14" << '\n';
                       plateau[posy+PionsPris[k]+1][posx] = 0;
                       plateau[posy+PionsPris[k]+1][6] = 1;
 
@@ -358,7 +364,7 @@ PionsPris.resize(0);
 
                   }
                   else if (etatPions[posy+PionsPris[k]]== 0) {
-                    std::cout << "fpok" << '\n';//pion j1 phase aller
+                    std::cout << "test15" << '\n';//pion j1 phase aller
                     std::cout << posy+PionsPris[k]+1 << '\n';
 
                     if(PionsPris[k]==0){
