@@ -323,7 +323,7 @@ music.play();
       				plateau = std::get<0>(plateau1);
       				etatPions = std::get<1>(plateau1);
               score_j1 = score_j1 - std::get<2>(plateau1);
-              SauvegardeGUI(aff_plateau, 1);
+              SauvegardeGUI(aff_plateau, etatPions, 1);
               tour = tour + 1;
             }
             else if(positionSouris.y < ((height*3)/7) and etatPions[1] < 2 ){
@@ -332,7 +332,7 @@ music.play();
       				plateau = std::get<0>(plateau1);
       				etatPions = std::get<1>(plateau1);
               score_j1 = score_j1 - std::get<2>(plateau1);
-              SauvegardeGUI(aff_plateau, 1);
+              SauvegardeGUI(aff_plateau, etatPions, 1);
               tour = tour + 1;
             }
             else if (positionSouris.y < ((height*4)/7) and etatPions[2] < 2 ){
@@ -341,7 +341,7 @@ music.play();
       				plateau = std::get<0>(plateau1);
       				etatPions = std::get<1>(plateau1);
               score_j1 = score_j1 - std::get<2>(plateau1);
-              SauvegardeGUI(aff_plateau, 1);
+              SauvegardeGUI(aff_plateau, etatPions, 1);
               tour = tour + 1;
             }
             else if (positionSouris.y < ((height*5)/7) and etatPions[3] < 2 ){
@@ -350,7 +350,7 @@ music.play();
       				plateau = std::get<0>(plateau1);
       				etatPions = std::get<1>(plateau1);
               score_j1 = score_j1 - std::get<2>(plateau1);
-              SauvegardeGUI(aff_plateau, 1);
+              SauvegardeGUI(aff_plateau, etatPions, 1);
               tour = tour + 1;
             }
             else if (positionSouris.y < ((height*6)/7) and etatPions[4] < 2){
@@ -359,7 +359,7 @@ music.play();
       				plateau = std::get<0>(plateau1);
       				etatPions = std::get<1>(plateau1);
               score_j1 = score_j1 - std::get<2>(plateau1);
-              SauvegardeGUI(aff_plateau, 1);
+              SauvegardeGUI(aff_plateau, etatPions, 1);
               tour = tour + 1;
             }
           }
@@ -368,10 +368,13 @@ music.play();
             meilleurCoup =  meilleurCoup2(arbre2(plateau,etatPions));
 
             plateau1 = deplace(plateau, etatPions, 1, meilleurCoup);
+
             plateau = std::get<0>(plateau1);
             etatPions = std::get<1>(plateau1);
             score_j1 = score_j1 - std::get<2>(plateau1);
-            SauvegardeGUI(aff_plateau, 1);
+            SauvegardeGUI(aff_plateau, etatPions, 3);
+            EcritDeplacement(meilleurCoup);
+
             tour = tour + 1;
           }
           else if (tour % 2 == 1){
@@ -384,7 +387,7 @@ music.play();
       				plateau = std::get<0>(plateau1);
       				etatPions = std::get<1>(plateau1);
               score_j2 = score_j2 - std::get<3>(plateau1);
-              SauvegardeGUI(aff_plateau, 1);
+              SauvegardeGUI(aff_plateau, etatPions, 1);
               tour = tour + 1;
             }
             else if(positionSouris.x < ((width*3)/7) and etatPions[6] < 2){
@@ -393,7 +396,7 @@ music.play();
       				plateau = std::get<0>(plateau1);
       				etatPions = std::get<1>(plateau1);
               score_j2 = score_j2 - std::get<3>(plateau1);
-              SauvegardeGUI(aff_plateau, 1);
+              SauvegardeGUI(aff_plateau, etatPions, 1);
               tour = tour + 1;
             }
             else if (positionSouris.x < ((width*4)/7) and etatPions[7] < 2){
@@ -402,7 +405,7 @@ music.play();
       				plateau = std::get<0>(plateau1);
       				etatPions = std::get<1>(plateau1);
               score_j2 = score_j2 - std::get<3>(plateau1);
-              SauvegardeGUI(aff_plateau, 1);
+              SauvegardeGUI(aff_plateau, etatPions, 1);
               tour = tour + 1;
             }
             else if (positionSouris.x < ((width*5)/7) and etatPions[8] < 2){
@@ -411,7 +414,7 @@ music.play();
       				plateau = std::get<0>(plateau1);
       				etatPions = std::get<1>(plateau1);
               score_j2 = score_j2 - std::get<3>(plateau1);
-              SauvegardeGUI(aff_plateau, 1);
+              SauvegardeGUI(aff_plateau, etatPions, 1);
               tour = tour + 1;
             }
             else if (positionSouris.x < ((width*6)/7) and etatPions[9] < 2){
@@ -420,7 +423,7 @@ music.play();
       				plateau = std::get<0>(plateau1);
       				etatPions = std::get<1>(plateau1);
               score_j2 = score_j2 - std::get<3>(plateau1);
-              SauvegardeGUI(aff_plateau, 1);
+              SauvegardeGUI(aff_plateau, etatPions, 1);
               tour = tour + 1;
             }
             for(int i = 0; i< 7;i++){
@@ -461,30 +464,30 @@ music.play();
       for(int i = 0; i< 7;i++){
           for(int j=0; j<7; j++){
             if (plateau[i][j]==1 and etatPions[i-1]==0){
-              aff_plateau[i][j] = " > ";
+              aff_plateau[i][j] = "> ";
             }
             else if (plateau[i][j]==1 and etatPions[i-1]==1){
-              aff_plateau[i][j] = " < ";
+              aff_plateau[i][j] = "< ";
             }
             else if (plateau[i][j]==2 and etatPions[j+4]==0){
-              aff_plateau[i][j] = " ^ ";
+              aff_plateau[i][j] = "^ ";
             }
             else if (plateau[i][j]==2 and etatPions[j+4]==1){
-              aff_plateau[i][j] = " V ";
+              aff_plateau[i][j] = "V ";
 
             }
-            else if (plateau[i][j]!=2 or plateau[i][j]!=1 and plateau){
-              aff_plateau[i][j] = " . ";
+            else if (plateau[i][j]!=2 and plateau[i][j]!=1 and plateau[i][j]!= 9){
+              aff_plateau[i][j] = ". ";
             }
             else if (plateau[i][j]==1 and etatPions[i-1]==2){
-              aff_plateau[i][j] = " < ";
+              aff_plateau[i][j] = "< ";
             }
             else if (plateau[i][j]==2 and etatPions[j+4]==2){
-              aff_plateau[i][j] = " V ";
+              aff_plateau[i][j] = "V ";
 
             }
             else if (plateau[i][j]== 9){
-              aff_plateau[i][j] = " X ";
+              aff_plateau[i][j] = "X ";
 
             }
           }
