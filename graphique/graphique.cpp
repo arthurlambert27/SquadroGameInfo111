@@ -353,7 +353,7 @@ music.play();
           }
 
           else if(tour%2 == 0 and choix == 1){
-            meilleurCoup =  meilleurCoup2(arbre2(plateau,etatPions));
+            meilleurCoup =  meilleurCoup6(arbre6(plateau,etatPions));
 
             plateau1 = deplace(plateau, etatPions, 1, meilleurCoup);
             plateau = std::get<0>(plateau1);
@@ -427,6 +427,7 @@ music.play();
 
 
 
+                  std::cout << "Le joueur 1 un un scoring de:" << fnErreur(plateau, etatPions) << "\n";
 
           }
           std::this_thread::sleep_for(std::chrono::nanoseconds(200000000));

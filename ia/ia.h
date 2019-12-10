@@ -9,6 +9,8 @@
 #include "vector"
 float fnErreur(std::vector<std::vector<int>> plateau, std::vector<int> etatPions);
 std::vector<std::vector<float>> arbre2(std::vector<std::vector<int>> plateauSave, std::vector<int> etatPions);
+std::vector<std::vector<float>> arbre6(std::vector<std::vector<int>> plateauSave, std::vector<int> etatPions);
 int meilleurCoup2(std::vector<std::vector<float>> probabilite);
+int meilleurCoup6(std::vector<std::vector<float>> probabilite);
 
 #endif
