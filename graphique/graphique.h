@@ -6,7 +6,7 @@
 #include <vector>
 #include <tuple>
 
-
+#include "../manip_fichier/manip_fichier.h"
 #include "../affichage/affichage.h"
 #include "../mouvement/mouvement.h"
 #include "../deplacement/deplacement.h"
