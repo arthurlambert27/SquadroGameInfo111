@@ -69,46 +69,7 @@ void affichePlateauV3(std::vector<std::vector<int>> plateau,std::vector<std::vec
 
           std::cout << fnErreur(plateau, etatPions) << "\n";
 
-/**
-  if (etatPions[choix_pion+4]== 1 and plateau[position[choix_pion+10]][position[choix_pion+11]] == 2 ){
 
-
-
-
-    PionX = position[choix_pion+13];
-    PionY = position[choix_pion+14];
-    std::cout << PionX << '\n';
-    std::cout << PionY << '\n';
-
-  aff_plateau[PionX][PionY] = "V";
-}
-else if (etatPions[choix_pion+4]== 0 and plateau[position[choix_pion+13]][position[choix_pion+14]] == 2 ){
-
-
-  PionX = position[choix_pion+13];
-  PionY = position[choix_pion+14];
-  aff_plateau[PionX][PionY] = "A";
-}
-if (etatPions[choix_pion-1]== 1 and  plateau[position[2*choix_pion-2]][position[2*choix_pion-1]] == 1){
-
-    //affichage = affichage + "|" + "<" + "   "; //phase retour
-    PionX = position[2*choix_pion-2];
-    PionY = position[2*choix_pion-1];
-    aff_plateau[PionX][PionY] = "<";
-
-  }
-  else if (etatPions[choix_pion-1]== 0 and  plateau[position[2*choix_pion-2]][position[2*choix_pion-1]] == 1){
-
-
-
-
-      //affichage = affichage + "|" + "<" + "   "; //phase retour
-      PionX = position[2*choix_pion-2];
-      PionY = position[2*choix_pion-1];
-      aff_plateau[PionX][PionY] = ">";
-
-    }
-*/
   std::cout << "-----------------------------" << '\n';
   std::cout << "| "<< aff_plateau[0][0] << " | "<<  aff_plateau[0][1] << " | "<< aff_plateau[0][2] << " | "<<  aff_plateau[0][3] << " | "<< aff_plateau[0][4] << " | "<< aff_plateau[0][5] << " | "<< aff_plateau[0][6] << " | "<<'\n';
   std::cout << "|   |   |   |   |   |   |   |" << '\n';

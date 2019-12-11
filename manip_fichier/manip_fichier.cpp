@@ -20,7 +20,7 @@ void SauvegardeGUI(std::vector<std::vector<std::string>> aff_plateau,std::vector
     // Ouverture
     for(int i = 0; i< 7;i++){
         for(int j=0; j<7; j++){
-          fichier << aff_plateau[i][j]; // Écriture;
+          fichier << aff_plateau[i][j]; // Écriture
 
           }
     fichier << std::endl;
@@ -37,7 +37,7 @@ std::tuple<std::vector<std::vector<int>>,std::vector<int>>  LectureGUI(std::vect
   if(choix == 0){
     std::string x;
 
-    std::ifstream lecture_fichier; // Déclaration
+    std::ifstream lecture_fichier;
     lecture_fichier.open("sauvegarde.txt");
     if (!lecture_fichier) {
       std::cerr << "Impossible d'ouvrir sauvegarde.txt";
@@ -103,7 +103,7 @@ return decodage;
 * @param meilleurCoup le coup choisi par l'IA
 */
 void EcritDeplacement(int meilleurCoup){
-  std::ofstream reponse; // Déclaration
+  std::ofstream reponse;
   reponse.open("resultat.txt");
   reponse << meilleurCoup << ",";
 }
