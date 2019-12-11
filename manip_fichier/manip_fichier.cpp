@@ -7,12 +7,14 @@
 * @return plateau qui retourne l'état du jeu suite au déplacement.
 */
 
-void SauvegardeGUI(std::vector<std::vector<std::string>> aff_plateau,std::vector<int> etatPions, int choix){
-  if(choix == 1){
+
+
+void SauvegardeGUI(std::vector<std::vector<std::string>> aff_plateau,std::vector<int> etatPions, int choix, int joueur){
+  if(choix == 0){
     if( remove( "sauvegarde.txt" ) != 0 )
-      perror( "le fichier n'existe pas" );
-    else
-      puts( "fichier effacé" );
+      perror( "sauvegarde.txt n'existe pas" );
+    else{
+      puts( "sauvegarde.txt effacé" );
     std::ofstream fichier; // Déclaration
     fichier.open("sauvegarde.txt");
     // Ouverture
@@ -24,30 +26,75 @@ void SauvegardeGUI(std::vector<std::vector<std::string>> aff_plateau,std::vector
     fichier << std::endl;
   }
     fichier.close();
+  }
     }
-  if(choix == 3){
-    if( remove( "etat_jeu.txt" ) != 0 )
-      perror( "le fichier n'existe pas" );
-    else
-      puts( "fichier effacé" );
-      std::ofstream fichier1;
-      fichier1.open("etat_jeu.txt");
 
-      for(int i = 1; i<6; i++){
-        fichier1 <<  ptnDeMouvement(i, 1, etatPions) << " ";
 
-  		}
-      fichier1 << std::endl;
+}
+
+std::tuple<std::vector<std::vector<int>>,std::vector<int>>  LectureGUI(std::vector<std::vector<int>> plateau,std::vector<int>etatPions, int choix, int joueur){
+  std::tuple<std::vector<std::vector<int>>,std::vector<int>> decodage (plateau, etatPions);
+  if(choix == 0){
+    std::string x;
+
+    std::ifstream lecture_fichier; // Déclaration
+    lecture_fichier.open("sauvegarde.txt");
+    if (!lecture_fichier) {
+      std::cerr << "Impossible d'ouvrir sauvegarde.txt";
+      lecture_fichier.close();
+
+    }
+    else{
       for(int i = 0; i< 7;i++){
           for(int j=0; j<7; j++){
-            fichier1 << aff_plateau[i][j]; // Écriture;
+            if (lecture_fichier >> x) {
 
-            }
-            fichier1 << std::endl;
+              if (x == "X"){
+                plateau[i][j] = 9;
+              }
+              else if (x == ">"){
+                plateau[i][j] = 1;
+                etatPions[i-1] = 0;
+              }
+
+              else if (x == "<"){
+                plateau[i][j] = 1;
+                etatPions[i-1] = 1;
+              }
+              else if (x == "^"){
+                plateau[i][j] = 2;
+                etatPions[j+4] = 0;
+              }
+              else if (x == "V"){
+                plateau[i][j] = 2;
+                etatPions[j+4] = 1;
+              }
+              else if (x == "."){
+                plateau[i][j] = 0;
+
+              }
+            std::cout << x;
           }
-          fichier1.close();
         }
+        std::cout << std::endl;
+      }
 
+
+
+
+        decodage = make_tuple(plateau, etatPions);
+
+
+
+      lecture_fichier.close();
+
+    }
+
+
+  }
+
+
+return decodage;
 
 }
 

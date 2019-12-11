@@ -5,6 +5,7 @@ void gui(int choix){
   int tour = 0;
   int score_j1 = 5;
   int score_j2 = 5;
+
   std::vector<std::vector<std::string>> aff_plateau;
   aff_plateau = std::vector<std::vector<std::string>> (7);
   for ( int i = 0; i < 7; i++ ){
@@ -14,12 +15,6 @@ void gui(int choix){
   sf::Vector2i positionSouris;
     int t = 0;
     std::vector<std::vector<int>> plateau = creationPlateauInitial();
-    for(int i = 0; i< 7;i++){
-        for(int j=0; j<7; j++){
-          std::cout << plateau[i][j];
-        }
-        std::cout << std::endl;
-      }
 
 		std::vector<int> etatPions;
 		etatPions = std::vector<int>(10);
@@ -38,37 +33,43 @@ void gui(int choix){
    sf::Music music;
 music.openFromFile("music.wav");
 music.play();
+plateau = std::get<0>(LectureGUI(plateau, etatPions, choix, 1));
+etatPions = std::get<1>(LectureGUI(plateau, etatPions, choix, 1));
+
+
+
+
 
 
    sf::Texture textureSoldat;
-     if (!textureSoldat.loadFromFile("bleuEpee.png"));
+     if (!textureSoldat.loadFromFile("bleuEpee.png"))
      {
        //std::cout << "Erreur lors de l'ouverture de la texture";
      }
 
      sf::Texture textureSoldat1;
-       if (!textureSoldat1.loadFromFile("orangeEpee.png"));
+       if (!textureSoldat1.loadFromFile("orangeEpee.png"))
        {
          //std::cout << "Erreur lors de l'ouverture de la texture";
        }
        sf::Texture textureSoldat2;
-         if (!textureSoldat2.loadFromFile("bleuArc.png"));
+         if (!textureSoldat2.loadFromFile("bleuArc.png"))
          {
            //std::cout << "Erreur lors de l'ouverture de la texture";
          }
          sf::Texture textureSoldat3;
-           if (!textureSoldat3.loadFromFile("orangeArc.png"));
+           if (!textureSoldat3.loadFromFile("orangeArc.png"))
            {
              //std::cout << "Erreur lors de l'ouverture de la texture";
            }
            sf::Texture textureSoldat4;
-             if (!textureSoldat4.loadFromFile("bleuCheval.png"));
+             if (!textureSoldat4.loadFromFile("bleuCheval.png"))
              {
                //std::cout << "Erreur lors de l'ouverture de la texture";
              }
 
              sf::Texture textureSoldat5;
-               if (!textureSoldat5.loadFromFile("orangeCheval.png"));
+               if (!textureSoldat5.loadFromFile("orangeCheval.png"))
                {
                  //std::cout << "Erreur lors de l'ouverture de la texture";
                }
@@ -312,6 +313,20 @@ music.play();
         }
       }
 
+      if(tour%2 == 0 and choix == 1) {
+
+        meilleurCoup =  meilleurCoup6(arbre6(plateau,etatPions));
+
+        plateau1 = deplace(plateau, etatPions, 1, meilleurCoup);
+
+        plateau = std::get<0>(plateau1);
+        etatPions = std::get<1>(plateau1);
+        score_j1 = score_j1 - std::get<2>(plateau1);
+        SauvegardeGUI(aff_plateau, etatPions, 1, 1);
+        EcritDeplacement(meilleurCoup);
+
+        tour = tour + 1;
+    }
       if (sf::Mouse::isButtonPressed(sf::Mouse::Left)){
       positionSouris = sf::Mouse::getPosition(window);
 
@@ -323,7 +338,7 @@ music.play();
       				plateau = std::get<0>(plateau1);
       				etatPions = std::get<1>(plateau1);
               score_j1 = score_j1 - std::get<2>(plateau1);
-              SauvegardeGUI(aff_plateau, etatPions, 1);
+              SauvegardeGUI(aff_plateau, etatPions, 0, 1);
               tour = tour + 1;
             }
             else if(positionSouris.y < ((height*3)/7) and etatPions[1] < 2 ){
@@ -332,7 +347,7 @@ music.play();
       				plateau = std::get<0>(plateau1);
       				etatPions = std::get<1>(plateau1);
               score_j1 = score_j1 - std::get<2>(plateau1);
-              SauvegardeGUI(aff_plateau, etatPions, 1);
+              SauvegardeGUI(aff_plateau, etatPions, 0, 1);
               tour = tour + 1;
             }
             else if (positionSouris.y < ((height*4)/7) and etatPions[2] < 2 ){
@@ -341,7 +356,7 @@ music.play();
       				plateau = std::get<0>(plateau1);
       				etatPions = std::get<1>(plateau1);
               score_j1 = score_j1 - std::get<2>(plateau1);
-              SauvegardeGUI(aff_plateau, etatPions, 1);
+              SauvegardeGUI(aff_plateau, etatPions, 0, 1);
               tour = tour + 1;
             }
             else if (positionSouris.y < ((height*5)/7) and etatPions[3] < 2 ){
@@ -350,7 +365,7 @@ music.play();
       				plateau = std::get<0>(plateau1);
       				etatPions = std::get<1>(plateau1);
               score_j1 = score_j1 - std::get<2>(plateau1);
-              SauvegardeGUI(aff_plateau, etatPions, 1);
+              SauvegardeGUI(aff_plateau, etatPions, 0, 1);
               tour = tour + 1;
             }
             else if (positionSouris.y < ((height*6)/7) and etatPions[4] < 2){
@@ -359,24 +374,12 @@ music.play();
       				plateau = std::get<0>(plateau1);
       				etatPions = std::get<1>(plateau1);
               score_j1 = score_j1 - std::get<2>(plateau1);
-              SauvegardeGUI(aff_plateau, etatPions, 1);
+              SauvegardeGUI(aff_plateau, etatPions, 0, 1);
               tour = tour + 1;
             }
           }
 
-          else if(tour%2 == 0 and choix == 1){
-            meilleurCoup =  meilleurCoup6(arbre6(plateau,etatPions));
 
-            plateau1 = deplace(plateau, etatPions, 1, meilleurCoup);
-
-            plateau = std::get<0>(plateau1);
-            etatPions = std::get<1>(plateau1);
-            score_j1 = score_j1 - std::get<2>(plateau1);
-            SauvegardeGUI(aff_plateau, etatPions, 3);
-            EcritDeplacement(meilleurCoup);
-
-            tour = tour + 1;
-          }
           else if (tour % 2 == 1){
 
 
@@ -387,7 +390,7 @@ music.play();
       				plateau = std::get<0>(plateau1);
       				etatPions = std::get<1>(plateau1);
               score_j2 = score_j2 - std::get<3>(plateau1);
-              SauvegardeGUI(aff_plateau, etatPions, 1);
+              SauvegardeGUI(aff_plateau, etatPions, 0, 2);
               tour = tour + 1;
             }
             else if(positionSouris.x < ((width*3)/7) and etatPions[6] < 2){
@@ -396,7 +399,7 @@ music.play();
       				plateau = std::get<0>(plateau1);
       				etatPions = std::get<1>(plateau1);
               score_j2 = score_j2 - std::get<3>(plateau1);
-              SauvegardeGUI(aff_plateau, etatPions, 1);
+              SauvegardeGUI(aff_plateau, etatPions, 0, 2);
               tour = tour + 1;
             }
             else if (positionSouris.x < ((width*4)/7) and etatPions[7] < 2){
@@ -405,7 +408,7 @@ music.play();
       				plateau = std::get<0>(plateau1);
       				etatPions = std::get<1>(plateau1);
               score_j2 = score_j2 - std::get<3>(plateau1);
-              SauvegardeGUI(aff_plateau, etatPions, 1);
+              SauvegardeGUI(aff_plateau, etatPions, 0, 2);
               tour = tour + 1;
             }
             else if (positionSouris.x < ((width*5)/7) and etatPions[8] < 2){
@@ -414,7 +417,7 @@ music.play();
       				plateau = std::get<0>(plateau1);
       				etatPions = std::get<1>(plateau1);
               score_j2 = score_j2 - std::get<3>(plateau1);
-              SauvegardeGUI(aff_plateau, etatPions, 1);
+              SauvegardeGUI(aff_plateau, etatPions, 0, 2);
               tour = tour + 1;
             }
             else if (positionSouris.x < ((width*6)/7) and etatPions[9] < 2){
@@ -423,15 +426,10 @@ music.play();
       				plateau = std::get<0>(plateau1);
       				etatPions = std::get<1>(plateau1);
               score_j2 = score_j2 - std::get<3>(plateau1);
-              SauvegardeGUI(aff_plateau, etatPions, 1);
+              SauvegardeGUI(aff_plateau, etatPions, 0, 2);
               tour = tour + 1;
             }
-            for(int i = 0; i< 7;i++){
-                      for(int j=0; j<7; j++){
-                          std::cout << plateau[i][j];
-                      }
-                      std::cout << std::endl;
-                  }
+
 
                   std::cout << "score_j1" << '\n';
                   std::cout << score_j1 << '\n';
@@ -443,7 +441,7 @@ music.play();
 
 
 
-                  std::cout << "Le joueur 1 un un scoring de:" << fnErreur(plateau, etatPions) << "\n";
+                  std::cout << "Le joueur 1 a un scoring de:" << fnErreur(plateau, etatPions) << "\n";
 
           }
           std::this_thread::sleep_for(std::chrono::nanoseconds(200000000));
@@ -493,12 +491,6 @@ music.play();
             }
           }
         }
-          for(int i = 0; i< 7;i++){
-              for(int j=0; j<7; j++){
-                std::cout << aff_plateau[i][j];
-              }
-              std::cout << std::endl;
-            }
 
 
       window.display();

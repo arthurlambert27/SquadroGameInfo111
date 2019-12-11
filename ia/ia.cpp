@@ -17,11 +17,7 @@ float fnErreur(std::vector<std::vector<int>> plateau, std::vector<int> etatPions
     posX = positionPions[(y-1)*2 + 1];
     retour = etatPions[y-1];
     if(retour == 0){
-      /*
-      std::cout << "ptn de mvt de: " << (float)ptnDeMouvement(posY,1,etatPions) << "\n";
-      std::cout << "posx: " << posX << "\n";
-      std::cout << "nb de point: " << (posX/(float)ptnDeMouvement(posY,1,etatPions)) << "\n";
-      */
+
       pointJ1 = pointJ1 + (posX/(float)ptnDeMouvement(posY,1,etatPions));
     }
     if(retour == 1){
@@ -36,11 +32,7 @@ float fnErreur(std::vector<std::vector<int>> plateau, std::vector<int> etatPions
     posX = positionPions[10 + (y-1)*2 + 1];
     retour = etatPions[ 5 + y-1];
     if(retour == 0){
-      /*
-      std::cout << "ptn de mvt de: " << (float)ptnDeMouvement(posX,2,etatPions) << "\n";
-      std::cout << "posy: " << posY << "\n";
-      std::cout << "nb de point: " << (posY/(float)ptnDeMouvement(posX,2,etatPions)) << "\n";
-      */
+
       pointJ2 = pointJ2 + ((6-posY)/abs(ptnDeMouvement(posX,2,etatPions)) );
     }
     if(retour == 1){
@@ -51,12 +43,7 @@ float fnErreur(std::vector<std::vector<int>> plateau, std::vector<int> etatPions
     }
   }
 
-/*
-std::cout << "J1 à:"<< pointJ1 << "\n";
-std::cout << "J2 à:"<< pointJ2 << "\n";
-std::cout << "J1 - J2: " << pointJ1 - pointJ2 << "\n";
-*/
-std::cout << "Le joueur 1 a un score de: " << pointJ1 - pointJ2 << "\n";
+
 return pointJ1 - pointJ2;
 }
 
@@ -91,13 +78,7 @@ std::vector<std::vector<float>> arbre2(std::vector<std::vector<int>> plateauSave
 
   }
 
-  std::cout << "Affichage des probabilité:\n";
-  for(int i = 0; i<5;i++){
-    for(int j = 0; j<5;j++){
-      std::cout <<probabilite[i][j] << ";";
-    }
-    std::cout << "\n";
-  }
+
   return probabilite;
 }
 
@@ -110,7 +91,6 @@ int meilleurCoup2(std::vector<std::vector<float>> probabilite){
     for(int j= 0; j<probabilite[i].size(); j++){
       compteur = compteur + probabilite[i][j];
     }
-    std::cout << std::endl << std::endl << "La moyenne est de: " << compteur/(float)probabilite[i].size() << "\n";
     if(compteur/(float)probabilite[i].size() > moyenne ){
       moyenne = compteur/(float)probabilite[i].size();
       meilleurCoup = i+1;
@@ -118,7 +98,6 @@ int meilleurCoup2(std::vector<std::vector<float>> probabilite){
 
     compteur = 0;
   }
-  std::cout << "Le meilleur coup est le deplacement du pion: " << meilleurCoup << ".\n";
   return meilleurCoup;
 }
 
@@ -150,12 +129,11 @@ std::vector<std::vector<float>> arbre6(std::vector<std::vector<int>> plateauSave
   float meilleurValeurTroisiemeCoupJ2 = 0;
 
 
-  std::cout << "Je suis dans arbre 6\n";
 
   for(int i = 0; i<5; i++){
 
     //On verifie que le coup peut être jouer.
-    std::cout << "ici1\n";
+
     if(etatPions[i] <2){
       plateau1 = deplace(plateau, etatPions,1,i + 1);
 
@@ -170,7 +148,7 @@ std::vector<std::vector<float>> arbre6(std::vector<std::vector<int>> plateauSave
         else{
           //Si le coup n'est pas jouable, on lui met une valeur très elevé pour qu'il ne soit pas joué
           probabilitePremierCoupJ2[a] = 10000;
-          std::cout << "Je suis dans le else 1\n";
+
         }
 
       }
@@ -208,7 +186,7 @@ std::vector<std::vector<float>> arbre6(std::vector<std::vector<int>> plateauSave
 
 
           for(int k = 0; k<5; k++){
-                std::cout << "ici2\n";
+
                 if((std::get<1>(plateau2))[k] <2){
 
                 plateau3 = deplace(std::get<0>(plateau2), std::get<1>(plateau2), 1, k+1);
@@ -224,7 +202,7 @@ std::vector<std::vector<float>> arbre6(std::vector<std::vector<int>> plateauSave
                   }
                   else{
                       probabiliteTroisiemeCoupJ2[a] = 10000;
-                      std::cout << "Je suis dans le else 2\n";
+
                   }
 
                 }
@@ -250,7 +228,7 @@ std::vector<std::vector<float>> arbre6(std::vector<std::vector<int>> plateauSave
 
 
                 }
-                std::cout << "La meilleur valeur est de: " << meilleurValeurTroisiemeCoupJ2 << "\n";
+
 
 
 
@@ -264,13 +242,12 @@ std::vector<std::vector<float>> arbre6(std::vector<std::vector<int>> plateauSave
                     plateau4 = deplace(std::get<0>(plateau3), std::get<1>(plateau3), 2, l+1);
 
                     for(int m =0; m<5; m++){
-                      std::cout << "ici3\n";
+
                       if(std::get<1>(plateau4)[m] <2){
 
 
-    std::cout << "i:" << i << " j:" << j << " k:" << k << " l:" <<l << " m:" << m  << "\n";
                       plateau5 = deplace(std::get<0>(plateau4), std::get<1>(plateau4), 1, m+1);
-                      std::cout << "ici5\n";
+
 
 
 
@@ -280,13 +257,13 @@ std::vector<std::vector<float>> arbre6(std::vector<std::vector<int>> plateauSave
                       analyseDeuxiemeCoupJ2 = std::vector<int>(5);
                       meilleurValeurDeuxiemeCoupJ2 = 10000.0;
                       for(int a = 0; a<5;a++){
-                        std::cout << "Troisième coup J2\n";
+
                         if(std::get<1>(plateau5)[5+a] <2){
                           probabiliteDeuxiemeCoupJ2[a] = fnErreur(std::get<0>(deplace(std::get<0>(plateau5),std::get<1>(plateau5) , 2 , a + 1)),    std::get<1>(deplace(std::get<0>(plateau5),std::get<1>(plateau5) , 2 , a + 1)));
                         }
                         else{
                           probabiliteDeuxiemeCoupJ2[a] = 10000;
-                          std::cout << "Je suis dans le else 3\n";
+
                         }
 
                       }
@@ -347,15 +324,7 @@ std::vector<std::vector<float>> arbre6(std::vector<std::vector<int>> plateauSave
 
   }
 }
-  /*
-  std::cout << "affichage\n";
-  for(int i = 0; i<probabilite.size();i++){
-    for(int j = 0; j<probabilite[i].size();j++){
-      std::cout << probabilite[i][j] << ";";
-    }
 
-    std::cout << "\n";
-  }*/
 
 
   return probabilite;

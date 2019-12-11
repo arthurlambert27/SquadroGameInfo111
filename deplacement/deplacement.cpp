@@ -21,7 +21,7 @@
 
 	 std::vector<int> pionDevantZoneMouvement = pionsDevantZoneMouvement(plateau, etatPions, joueur, noPion);
 		if(joueur == 1){
-      std::cout << "Le joueur est le joueur 1\n";
+
 
 			int posy = 0;
 			int posx = 0;
@@ -45,7 +45,7 @@
 
 			//Si il y a pas de pion dans la zone de mouvement devant moi
 			if(tabIsNul(pionDevantZoneMouvement)){
-        std::cout << "Pion devant zone mouvement est nul\n";
+
 				//Si il est au bout
 				if(6 <= posx + ptnMouvement){
 
@@ -76,7 +76,7 @@
 
 
 			else{
-        std::cout << "Pion devant zone mouvement n'est pas nul\n";
+
 				std::vector<int> pionsDev= pionsDevant(plateau, etatPions, joueur, noPion);
 				int compteur = 0;
 				int sauteSurAdversaire = 0;
@@ -205,8 +205,6 @@
 
 
 
-
-              std::cout << " Je suis jusqu'ici quoi1...\n";
               if(arrivee_j1 == 0 and etatPions[noPion-1]==1 and joueur == 1){
                 etatPions[noPion-1] = 2 ;
 
@@ -229,7 +227,6 @@
 
 //PionsPris.clear();
 
-std::cout << " Je suis jusqu'ici quoi2...\n";
 
 
 		if(joueur == 2){
@@ -440,18 +437,8 @@ std::cout << " Je suis jusqu'ici quoi2...\n";
 
 
 
-        std::cout << "restJ1: " << reste_pion_j1 << "; restJ2: " << reste_pion_j2 <<";\n";
+
         affichePlateau(plateau);
-
-        std::cout << "Affichage de etat pion qui a une size de" << etatPions.size() <<":\n";
-        for(int i = 0; i<10;i++){
-          std::cout << etatPions[i] << ";";
-        }
-        std::cout << "Fin de deplace, je vais return la tuple\n";
-
-        std::cout << "plateau: " << &plateau << "\n";
-        std::cout << "etatPions: " << &etatPions << "\n";
-        std::cout << "PionPris: " << &PionsPris << std::endl;
 
 
 
