@@ -1,10 +1,6 @@
 #include "position.h"
 
-/*
- * Permet de localiser ou sont les pions (de 0 a 9 pour le joueur 1)(de 10 a 19 pour le joueur 2) Par exemple, la position du deuxième pions du joueur 1 est l'élément 2 et 3'
- * @param plateau Etat du jeu
- * @return posPions un tableau des positions des pions
-*/
+
 std::vector<int> posPions(std::vector<std::vector<int>> plateau){
 		std::vector<int> posPions;
 		for(int i = 1; i<6; i++){
@@ -27,15 +23,7 @@ std::vector<int> posPions(std::vector<std::vector<int>> plateau){
 	}
 
 
-  /*
-  * Permet de voir si il y a un jeton dans les 3 cases devant une pièce.
-  * Les données de retour sont sur la zone d'un tableau de 3 entier qui reprèsente les 3 case devant le pion dans sa direction.
-  * @param plateau
-  * @param etatPions
-  * @param joueur
-  * @param pions
-  * @return
-  */
+
   std::vector<int> pionsDevant(std::vector<std::vector<int>> plateau, std::vector<int> etatPions, int joueur, int noPion){
   	std::vector<int> pionsDevant;
   	int posPionX = 0;

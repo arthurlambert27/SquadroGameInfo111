@@ -438,7 +438,7 @@
 
 
 
-        affichePlateau(plateau);
+        
 
 
 
