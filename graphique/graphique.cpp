@@ -9,6 +9,10 @@ void gui(int choix){
   aff_plateau = std::vector<std::vector<std::string>> (7);
   for ( int i = 0; i < 7; i++ ){
   aff_plateau[i] = std::vector<std::string>(7);
+
+
+
+
 }
 
   sf::Vector2i positionSouris;
@@ -271,42 +275,115 @@ music.play();
         for(int y = 0; y<plateau.size(); y++){
           if (plateau[y][x] == 1 ){
             if(y == 1){
+              if(etatPions[0] == 0){
+                pion1.setPosition(sf::Vector2f(  (x*width)/7 +((width/7)*0.85)  , (y*height)/7  +((height/7)*0.15)    ));
+                  pion1.scale(-1.f,1.f);
+              }
+              else{
+                pion1.setPosition(sf::Vector2f(  (x*width)/7 +((width/7)*0.15)  , (y*height)/7  +((height/7)*0.15)    ));
 
-              pion1.setPosition(sf::Vector2f(  (x*width)/7 +((width/7)*0.15)  , (y*height)/7  +((height/7)*0.15)    ));
+              }
+
             }
             else if(y == 2){
+              if(etatPions[1] == 0){
+                pion2.setPosition(sf::Vector2f( (x*width)/7  +((width/7)*0.85)  , (y*height)/7  +((height/7)*0.15)    ));
+                pion2.scale(-1.f,1.f);
+              }
+              else{
+                pion2.setPosition(sf::Vector2f( (x*width)/7  +((width/7)*0.15)  , (y*height)/7  +((height/7)*0.15)    ));
 
-              pion2.setPosition(sf::Vector2f( (x*width)/7  +((width/7)*0.15)  , (y*height)/7  +((height/7)*0.15)    ));
+
+              }
+
             }
             else if(y == 3){
+              if(etatPions[2]==0){
+                pion3.setPosition(sf::Vector2f( (x*width)/7 +((width/7)*0.85)  , (y*height)/7   +((height/7)*0.15)   ));
+                pion3.scale(-1.f,1.f);
+              }
+              else{
+                pion3.setPosition(sf::Vector2f( (x*width)/7 +((width/7)*0.15)  , (y*height)/7   +((height/7)*0.15)   ));
+              }
 
-              pion3.setPosition(sf::Vector2f( (x*width)/7 +((width/7)*0.15)  , (y*height)/7   +((height/7)*0.15)   ));
             }
             else if(y == 4){
+              if(etatPions[3]==0){
+                pion4.setPosition(sf::Vector2f( (x*width)/7  +((width/7)*0.85) , (y*height)/7   +((height/7)*0.15)   ));
+                pion4.scale(-1.f,1.f);
+              }
+              else{
+                pion4.setPosition(sf::Vector2f( (x*width)/7  +((width/7)*0.15) , (y*height)/7   +((height/7)*0.15)   ));
+              }
 
-              pion4.setPosition(sf::Vector2f( (x*width)/7  +((width/7)*0.15) , (y*height)/7   +((height/7)*0.15)   ));
             }
             else if(y == 5){
+              if(etatPions[4]==0){
+                pion5.setPosition(sf::Vector2f( (x*width)/7  +((width/7)*0.85) , (y*height)/7   +((height/7)*0.15)   ));
+                pion5.scale(-1.f,1.f);
+              }
+              else{
+                pion5.setPosition(sf::Vector2f( (x*width)/7  +((width/7)*0.15) , (y*height)/7   +((height/7)*0.15)   ));
+              }
 
-              pion5.setPosition(sf::Vector2f( (x*width)/7  +((width/7)*0.15) , (y*height)/7   +((height/7)*0.15)   ));
             }
 
           }
           else if (plateau[y][x]==2){
             if(x == 1){
-              pion6.setPosition(sf::Vector2f( (x*width)/7 +((width/7)*0.15)  ,  (y*height)/7  +((height/7)*0.15)     ));
+              if(etatPions[5]==0){
+                pion6.setPosition(sf::Vector2f( (x*width)/7 +((width/7)*0.70)  ,  (y*height)/7  +((height/7)*0.10)     ));
+                pion6.rotate(70);
+                pion6.scale(0.8, 0.8);
+              }
+              else{
+                pion6.setPosition(sf::Vector2f( (x*width)/7 +((width/7)*0.15)  ,  (y*height)/7  +((height/7)*0.15)     ));
+              }
+
             }
             else if (x == 2){
-              pion7.setPosition(sf::Vector2f( (x*width)/7  +((width/7)*0.15) ,  (y*height)/7   +((height/7)*0.15)    ));
+              if(etatPions[6]==0){
+                pion7.setPosition(sf::Vector2f( (x*width)/7  +((width/7)*0.70) ,  (y*height)/7   +((height/7)*0.10)    ));
+                pion7.rotate(70);
+                pion7.scale(0.8,0.8);
+              }
+              else{
+                pion7.setPosition(sf::Vector2f( (x*width)/7  +((width/7)*0.15) ,  (y*height)/7   +((height/7)*0.15)    ));
+              }
+
             }
             else if (x == 3){
-              pion8.setPosition(sf::Vector2f( (x*width)/7  +((width/7)*0.15) ,  (y*height)/7  +((height/7)*0.15)     ));
+              if(etatPions[7]==0){
+                pion8.setPosition(sf::Vector2f( (x*width)/7  +((width/7)*0.70) ,  (y*height)/7  +((height/7)*0.10)     ));
+                pion8.rotate(70);
+                pion8.scale(0.8,0.8);
+              }
+              else{
+                pion8.setPosition(sf::Vector2f( (x*width)/7  +((width/7)*0.15) ,  (y*height)/7  +((height/7)*0.15)     ));
+
+              }
             }
             else if (x ==4){
-              pion9.setPosition(sf::Vector2f( (x*width)/7  +((width/7)*0.15) ,  (y*height)/7  +((height/7)*0.15)     ));
+              if(etatPions[8]==0){
+                pion9.setPosition(sf::Vector2f( (x*width)/7  +((width/7)*0.70) ,  (y*height)/7  +((height/7)*0.10)     ));
+                pion9.rotate(70);
+                pion9.scale(0.8,0.8);
+              }
+              else{
+                pion9.setPosition(sf::Vector2f( (x*width)/7  +((width/7)*0.15) ,  (y*height)/7  +((height/7)*0.15)     ));
+
+              }
             }
             else if(x == 5){
-              pion10.setPosition(sf::Vector2f( (x*width)/7  +((width/7)*0.15) ,  (y*height)/7  +((height/7)*0.15)     ));
+              if(etatPions[9]==0){
+                pion10.setPosition(sf::Vector2f( (x*width)/7  +((width/7)*0.70) ,  (y*height)/7  +((height/7)*0.10)     ));
+                pion10.rotate(70);
+                pion10.scale(0.8,0.8);
+              }
+              else{
+                pion10.setPosition(sf::Vector2f( (x*width)/7  +((width/7)*0.15) ,  (y*height)/7  +((height/7)*0.15)     ));
+
+              }
             }
           }
         }
