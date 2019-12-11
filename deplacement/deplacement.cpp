@@ -323,5 +323,14 @@ std::tuple < std::vector < std::vector < int >> , std::vector < int > , int, int
 
   affichePlateau(plateau);
 
+<<<<<<< HEAD
   return plateau1;
 }
+=======
+        
+
+
+
+		return plateau1;
+	 }
+>>>>>>> 7ab9fc2457a6835ace80339fa4ab52cf5b6bcb7b
