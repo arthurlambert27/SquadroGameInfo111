@@ -20,7 +20,7 @@ float fnErreur(std::vector<std::vector<int>> plateau, std::vector<int> etatPions
 
 /*
 * Les fonction arbres sont des fonctions qui vont créer les feuilles des arbres de la fnErreur de tout les coup possible.
-* La compexité de arbre6 est un peu moins que 5⁶ et la complexité d'abre2 est un peu moins que 5².
+* La compexité de arbre6 est un peu moins que n⁶ et la complexité d'abre2 est un peu moins que n².ou n est le nombre de coup possible par un joueur (par defaut 5)
 * @param plateauSave qui est l'état du plateau
 * @param etatPions qui est l'état des pions
 * @return qui est l'arbre des probabilite

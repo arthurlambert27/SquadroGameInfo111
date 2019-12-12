@@ -73,10 +73,9 @@ std::tuple<std::vector<std::vector<int>>,std::vector<int>>  LectureGUI(std::vect
                 plateau[i][j] = 0;
 
               }
-            std::cout << x;
+
           }
         }
-        std::cout << std::endl;
       }
 
 

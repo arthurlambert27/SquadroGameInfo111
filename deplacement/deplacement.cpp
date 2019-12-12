@@ -321,7 +321,7 @@ std::tuple < std::vector < std::vector < int >> , std::vector < int > , int, int
 
   }
 
-  affichePlateau(plateau);
+
 
 
 

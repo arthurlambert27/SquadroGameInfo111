@@ -34,9 +34,12 @@ void gui(int choix){
    int height = window.getSize().y;
    int width = window.getSize().x;
 
+//Joue la musique
    sf::Music music;
 music.openFromFile("music.wav");
 music.play();
+
+
 plateau = std::get<0>(LectureGUI(plateau, etatPions, choix, 1));
 etatPions = std::get<1>(LectureGUI(plateau, etatPions, choix, 1));
 
@@ -276,10 +279,12 @@ etatPions = std::get<1>(LectureGUI(plateau, etatPions, choix, 1));
         for(int y = 0; y<plateau.size(); y++){
           if (plateau[y][x] == 1 ){
             if(y == 1){
+              //Si il est sur l'allé
               if(etatPions[0] == 0){
                 pion1.setPosition(sf::Vector2f(  (x*width)/7 +((width/7)*0.85)  , (y*height)/7  +((height/7)*0.15)    ));
                   pion1.scale(-1.f,1.f);
               }
+              //Si il est sur le retour
               else{
                 pion1.setPosition(sf::Vector2f(  (x*width)/7 +((width/7)*0.15)  , (y*height)/7  +((height/7)*0.15)    ));
 
@@ -390,6 +395,7 @@ etatPions = std::get<1>(LectureGUI(plateau, etatPions, choix, 1));
         }
       }
 
+      //Si c'est au joueur 1 et qu'on est contre l'ia
       if(tour%2 == 0 and choix == 1) {
 
         meilleurCoup =  meilleurCoup6(arbre6(plateau,etatPions));
@@ -399,7 +405,7 @@ etatPions = std::get<1>(LectureGUI(plateau, etatPions, choix, 1));
         plateau = std::get<0>(plateau1);
         etatPions = std::get<1>(plateau1);
         score_j1 = score_j1 - std::get<2>(plateau1);
-        SauvegardeGUI(aff_plateau, etatPions, 1, 1);
+        //SauvegardeGUI(aff_plateau, etatPions, 1, 1);
         EcritDeplacement(meilleurCoup);
 
         tour = tour + 1;
@@ -536,6 +542,7 @@ etatPions = std::get<1>(LectureGUI(plateau, etatPions, choix, 1));
       window.draw(pion8);
       window.draw(pion9);
       window.draw(pion10);
+
       pastilleCouleurJoueur(window, tour, score_j1, score_j2);
       for(int i = 0; i< 7;i++){
           for(int j=0; j<7; j++){
