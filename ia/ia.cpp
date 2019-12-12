@@ -10,8 +10,8 @@ float fnErreur(std::vector<std::vector<int>> plateau, std::vector<int> etatPions
   float pointJ2 = 0;
   std::vector<int> positionPions = posPions(plateau);
   int retour = 0;
-  int posX = 0;
-  int posY = 0;
+  float posX = 0;
+  float posY = 0;
   for(int y = 1; y<plateau.size() - 1; y++){
     posY = positionPions[(y-1)*2];
     posX = positionPions[(y-1)*2 + 1];
@@ -20,11 +20,11 @@ float fnErreur(std::vector<std::vector<int>> plateau, std::vector<int> etatPions
 
       pointJ1 = pointJ1 + (posX/(float)ptnDeMouvement(posY,1,etatPions));
     }
-    if(retour == 1){
-      pointJ1 = pointJ1 + ((6-posX)/abs(ptnDeMouvement(y,1,etatPions)) + 6/ptnDeMouvement(y,1,etatPionsNul));
+    else if(retour == 1){
+      pointJ1 = pointJ1 + ((6.-posX)/((float)abs((float)(ptnDeMouvement(y,1,etatPions)))) + 6./((float)ptnDeMouvement(y,1,etatPionsNul)));
     }
-    if(retour == 2){
-      pointJ1 = pointJ1 + 8;
+    else if(retour == 2){
+      pointJ1 = pointJ1 + 8.;
     }
   }
   for(int y = 1; y<plateau.size() - 1; y++){
@@ -33,13 +33,13 @@ float fnErreur(std::vector<std::vector<int>> plateau, std::vector<int> etatPions
     retour = etatPions[ 5 + y-1];
     if(retour == 0){
 
-      pointJ2 = pointJ2 + ((6-posY)/abs(ptnDeMouvement(posX,2,etatPions)) );
+      pointJ2 = pointJ2 + ((6.-posY)/(float)abs((float)ptnDeMouvement(posX,2,etatPions)) );
     }
-    if(retour == 1){
-        pointJ2 = pointJ2 + (posY/(float)abs(ptnDeMouvement(posX,2,etatPions)) + 6/abs(ptnDeMouvement(posX,2,etatPionsNul)));
+    else if(retour == 1){
+        pointJ2 = pointJ2 + (posY/(float)abs(ptnDeMouvement(posX,2,etatPions)) + 6/abs((float)ptnDeMouvement(posX,2,etatPionsNul)));
     }
-    if(retour == 2){
-      pointJ2 = pointJ2 + 8;
+    else if(retour == 2){
+      pointJ2 = pointJ2 + 8.;
     }
   }
 
