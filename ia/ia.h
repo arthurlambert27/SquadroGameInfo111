@@ -20,6 +20,7 @@ float fnErreur(std::vector<std::vector<int>> plateau, std::vector<int> etatPions
 
 /*
 * Les fonction arbres sont des fonctions qui vont créer les feuilles des arbres de la fnErreur de tout les coup possible.
+* La compexité de arbre6 est un peu moins que 5⁶ et la complexité d'abre2 est un peu moins que 5².
 * @param plateauSave qui est l'état du plateau
 * @param etatPions qui est l'état des pions
 * @return qui est l'arbre des probabilite
@@ -30,6 +31,7 @@ std::vector<std::vector<float>> arbre6(std::vector<std::vector<int>> plateauSave
 
 /*
 * Les fonctions meilleur coup permette de trouver le meilleur coup en fonction des probabilite
+* La complexité de meilleurCoup2 et 6 est de 5².
 * @param probabilite qui sont les feuilles del'arbre de probabilite des coups
 * @return un entier représentant le meilleur coup a faire
 */
