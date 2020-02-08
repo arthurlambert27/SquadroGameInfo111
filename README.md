@@ -1,5 +1,8 @@
 # SquadroGameInfo111
 
+
+Rapport: https://docs.google.com/document/d/1HKawiv2AKhotdiu_aJtqxrrF2yUdUsJ9Jy1ZeOzcbsA/edit?usp=sharing
+
 Adaptation du jeu Sqadro en c++.
 
 Création d'une IA basé sur un arbre des possibilités.
